@@ -1,0 +1,2 @@
+module SellTypeLinksHelper
+end

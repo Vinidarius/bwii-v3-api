@@ -1,0 +1,2 @@
+module UserTypeLinksHelper
+end

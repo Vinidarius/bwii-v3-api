@@ -1,0 +1,2 @@
+module SectorLinksHelper
+end
