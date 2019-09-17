@@ -7,7 +7,7 @@ class Api::V3::UserTypesFilter < Api::V3::BaseFilter
 			user_types = user_types.where('user_types.compagny_id = ?', params[:compagny_id])
 		end
 
-   return self.with_associations(user_types)
+   return self.with_associations(user_types.order(id: :asc))
   end
 
 end
