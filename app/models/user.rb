@@ -69,6 +69,20 @@ class User < ActiveRecord::Base
 		}
 	end
 
+	def render_details_api
+		{
+			id: self.id,
+			created_at: self.created_at,
+			firstname: self.firstname,
+			lastname: self.lastname,
+			email: self.email,
+			phone_number: self.phone_number,
+			company: self.company,
+			job: self.job,
+			user_type_links: self.user_type_links.map(&:render_details_api),
+		}
+	end
+
 	def destroy_associations
 		self.user_type_links.destroy_all
 		self.favorites.destroy_all

@@ -22,6 +22,12 @@ class Api::V3::UsersController < Api::V3::BaseController
 		render :json => @user.render_connect_api
 	end
 
+	def details
+		@user = User.find_by_id(params[:id])
+		return render :json => [] unless !@user.blank?
+		render :json => @user.render_details_api
+	end
+
 	def create
 		@user = User.new(permitted_params)
 		return render :json => [] unless @user.save

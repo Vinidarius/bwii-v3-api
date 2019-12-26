@@ -11,4 +11,11 @@ class UserTypeLink < ApplicationRecord
 		}
 	end
 
+	def render_details_api
+		{
+			id: self.id,
+			user_type_id: UserType.find_by(id: self.user_type_id).render_api
+		}
+	end
+
 end
