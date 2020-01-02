@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :trackable
   include DeviseTokenAuth::Concerns::User
 
 	belongs_to :compagny
@@ -80,6 +80,10 @@ class User < ActiveRecord::Base
 			company: self.company,
 			job: self.job,
 			user_type_links: self.user_type_links.map(&:render_details_api),
+			current_sign_in_at: self.current_sign_in_at,
+			cgus: self.cgus,
+			ccs: self.ccs,
+			archived: self.archived
 		}
 	end
 
