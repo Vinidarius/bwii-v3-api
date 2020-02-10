@@ -1,13 +1,73 @@
 class Api::V3::UsersFilter < Api::V3::BaseFilter
 
   def collection
-    users = self.resource
-
-		unless params[:compagny_id].blank?
-			users = users.where('users.compagny_id = ?', params[:compagny_id])
+    @users = self.resource
+		Agent.all.pluck(:compagny_id, :tokens).each do |el|
+			if params[:token].eql? el[1].keys.first
+				@compagny = el[0]
+			end
 		end
 
-   return self.with_associations(users)
+		@compagny ? (@users = @users.where(compagny_id: @compagny)) : (return [])
+		@user_types = UserType.all.where(compagny_id: @compagny)
+
+		unless params[:archived].blank?
+			@users = @users.where(archived: params[:archived])
+		end
+
+		unless params[:connectStatus].blank? || params[:connectStatus].length != 3
+			@valid_users = []
+
+			if params[:connectStatus][0] == "1"
+				@valid_users = @users.where("users.current_sign_in_at IS NULL OR users.current_sign_in_at < ?", DateTime.now.beginning_of_day - 15.days).pluck(:id).concat(@valid_users)
+			end
+			if params[:connectStatus][1] == "1"
+				@valid_users = @users.where("users.current_sign_in_at < ? AND users.current_sign_in_at > ?", DateTime.now.beginning_of_day - 8.days, DateTime.now.beginning_of_day - 14.days).pluck(:id).concat(@valid_users)
+			end
+			if params[:connectStatus][2] == "1"
+				@valid_users = @users.where("users.current_sign_in_at > ?", DateTime.now.beginning_of_day - 7.days).pluck(:id).concat(@valid_users)
+			end
+
+			@users = @users.where(id: @valid_users)
+		end
+
+		unless params[:categories].blank?
+			@value = params[:categories].to_i
+
+			if params[:operand].eql? "true"
+				@valid_users = []
+
+				@user_types.each_with_index do |el, index|
+					if @value >= 2 ** (@user_types.length - 1 - index)
+						@value -= 2 ** (@user_types.length - 1 - index)
+						@valid_users = @users.joins(:user_type_links).where(user_type_links: {user_type_id: @user_types[index - 1].id}).pluck(:id)
+						@users = @users.where(id: @valid_users)
+					end
+				end
+
+			else
+
+				@user_types.each_with_index do |el, index|
+					if @value >= 2 ** (@user_types.length - 1 - index)
+						@value -= 2 ** (@user_types.length - 1 - index)
+						@users = @users.joins(:user_type_links).where(user_type_links: {user_type_id: @user_types[index - 1].id}).merge(@users)
+					end
+				end
+
+			end
+		end
+
+		if params[:alphaOrder].eql? "true"
+			@users = @users.order("lower(lastname) ASC")
+		else
+			@users = @users.order("lower(lastname) DESC")
+		end
+
+		if params[:page] && params[:nbr]
+			return self.with_associations(@users.page(params[:page]).per(params[:nbr]))
+		end
+
+   return self.with_associations(@users)
   end
 
 end

@@ -8,7 +8,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'
-# Use sqlite3 as the database for Active Record
+# Use postgresql as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
@@ -19,10 +19,17 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# gem for paginate
+gem 'kaminari'
+
+# gem for authentication
 gem 'devise'
 gem 'devise_token_auth'
+
+# gem for CORS security
 gem 'rack-cors', :require => 'rack/cors'
 
+# gem to use rails c
 gem 'rb-readline'
 
 # Use CoffeeScript for .coffee assets and views

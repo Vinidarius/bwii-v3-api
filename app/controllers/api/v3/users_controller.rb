@@ -12,7 +12,7 @@ class Api::V3::UsersController < Api::V3::BaseController
 	end
 
 	def list
-		@users = User.all
+		@users = Api::V3::UsersFilter.new(User.all, params).collection
 		render :json => array_serializer(@users, "list")
 	end
 
