@@ -45,8 +45,7 @@ class User < ActiveRecord::Base
 			lastname: self.lastname,
 			email: self.email,
 			company: self.company,
-			job: self.job,
-			user_type_ids: UserTypeLink.all.where(user_id: self.id).pluck(:user_type_id)
+			job: self.job
 		}
 	end
 
