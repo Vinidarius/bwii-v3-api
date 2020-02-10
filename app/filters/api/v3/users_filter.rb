@@ -31,7 +31,7 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 			@users = @users.where(id: @valid_users)
 		end
 
-		unless params[:categories].blank?
+		if params[:categories] && params[:categories].to_i != 0
 			@value = params[:categories].to_i
 			@valid_users = []
 
