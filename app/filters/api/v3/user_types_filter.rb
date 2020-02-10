@@ -1,13 +1,16 @@
 class Api::V3::UserTypesFilter < Api::V3::BaseFilter
 
   def collection
-    user_types = self.resource
-
-		unless params[:compagny_id].blank?
-			user_types = user_types.where('user_types.compagny_id = ?', params[:compagny_id])
+    @user_types = self.resource
+		Agent.all.pluck(:compagny_id, :tokens).each do |el|
+			if params[:token].eql? el[1].keys.first
+				@compagny = el[0]
+			end
 		end
 
-   return self.with_associations(user_types.order(id: :asc))
+		@compagny ? (@user_types = @user_types.where(compagny_id: @compagny)) : (return [])
+
+   return self.with_associations(@user_types)
   end
 
 end
