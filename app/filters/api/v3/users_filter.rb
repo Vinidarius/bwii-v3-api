@@ -19,13 +19,13 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 			@valid_users = []
 
 			if params[:connectStatus][0] == "1"
-				@valid_users = @users.where("users.current_sign_in_at IS NULL OR users.current_sign_in_at < ?", DateTime.now.beginning_of_day - 15.days).pluck(:id).concat(@valid_users)
+				@valid_users = @users.where("users.current_sign_in_at > ?", DateTime.now.beginning_of_day - 7.days).pluck(:id).concat(@valid_users)
 			end
 			if params[:connectStatus][1] == "1"
 				@valid_users = @users.where("users.current_sign_in_at < ? AND users.current_sign_in_at > ?", DateTime.now.beginning_of_day - 8.days, DateTime.now.beginning_of_day - 14.days).pluck(:id).concat(@valid_users)
 			end
 			if params[:connectStatus][2] == "1"
-				@valid_users = @users.where("users.current_sign_in_at > ?", DateTime.now.beginning_of_day - 7.days).pluck(:id).concat(@valid_users)
+				@valid_users = @users.where("users.current_sign_in_at IS NULL OR users.current_sign_in_at < ?", DateTime.now.beginning_of_day - 15.days).pluck(:id).concat(@valid_users)
 			end
 
 			@users = @users.where(id: @valid_users)
