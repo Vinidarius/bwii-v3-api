@@ -45,8 +45,19 @@ class User < ActiveRecord::Base
 			lastname: self.lastname,
 			email: self.email,
 			company: self.company,
-			job: self.job
+			job: self.job,
+			connectStatus: self.connectStatus
 		}
+	end
+
+	def connectStatus
+		if self.current_sign_in_at == nil || self.current_sign_in_at < DateTime.now.beginning_of_day - 15.days
+			return "red"
+		elsif self.current_sign_in_at < DateTime.now.beginning_of_day - 8.days && self.current_sign_in_at > DateTime.now.beginning_of_day - 14.days
+			return "orange"
+		elsif self.current_sign_in_at > DateTime.now.beginning_of_day - 7.days
+			return "green"
+		end
 	end
 
 	def render_connect_api
