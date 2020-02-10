@@ -55,9 +55,9 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 		end
 
 		if params[:alphaOrder].eql? "true"
-			@users = @users.includes(:user_type_links).order("user_type_links.user_type_id", "lower(lastname) ASC")
+			@users = @users.order("lower(lastname) ASC")
 		else
-			@users = @users.includes(:user_type_links).order("user_type_links.user_type_id", "lower(lastname) DESC")
+			@users = @users.order("lower(lastname) DESC")
 		end
 
 		if params[:page] && params[:nbr]
