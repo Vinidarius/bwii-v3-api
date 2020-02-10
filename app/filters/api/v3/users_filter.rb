@@ -33,27 +33,24 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 
 		unless params[:categories].blank?
 			@value = params[:categories].to_i
+			@valid_users = []
 
 			if params[:operand].eql? "true"
-				@valid_users = []
-
 				@user_types.each_with_index do |el, index|
 					if @value >= 2 ** (@user_types.length - 1 - index)
 						@value -= 2 ** (@user_types.length - 1 - index)
-						@valid_users = @users.joins(:user_type_links).where(user_type_links: {user_type_id: @user_types[index - 1].id}).pluck(:id)
+						@valid_users = @users.joins(:user_type_links).where(user_type_links: {user_type_id: el.id}).pluck(:id)
 						@users = @users.where(id: @valid_users)
 					end
 				end
-
 			else
-
 				@user_types.each_with_index do |el, index|
 					if @value >= 2 ** (@user_types.length - 1 - index)
 						@value -= 2 ** (@user_types.length - 1 - index)
-						@users = @users.joins(:user_type_links).where(user_type_links: {user_type_id: @user_types[index - 1].id}).merge(@users)
+						@valid_users = @users.joins(:user_type_links).where(user_type_links: {user_type_id: el.id}).pluck(:id).concat(@valid_users)
 					end
 				end
-
+				@users = @users.where(id: @valid_users)
 			end
 		end
 
