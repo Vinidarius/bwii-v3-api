@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
 			resources :real_estates, only: [:index, :show, :create, :update, :destroy]
 			resources :floors, only: [:create, :update, :destroy]
+			resources :rooms, only: [:create, :update, :destroy]
 			resources :parkings, only: [:create, :update, :destroy]
 
 			resources :real_estate_types, only: [:index, :show, :create, :update, :destroy]

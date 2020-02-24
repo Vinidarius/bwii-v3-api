@@ -11,6 +11,10 @@ class Api::V3::RealEstateTypeLinksFilter < Api::V3::BaseFilter
 			real_estate_type_links = real_estate_type_links.where('real_estate_type_links.parking_id = ?', params[:parking_id])
 		end
 
+		unless params[:room_id].blank?
+			real_estate_type_links = real_estate_type_links.where('real_estate_type_links.room_id = ?', params[:room_id])
+		end
+
 		unless params[:real_estate_id].blank?
 			real_estate_type_links = real_estate_type_links.where('real_estate_type_links.real_estate_id = ?', params[:real_estate_id])
 		end

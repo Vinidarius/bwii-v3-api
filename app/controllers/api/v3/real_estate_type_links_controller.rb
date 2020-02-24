@@ -45,9 +45,10 @@ class Api::V3::RealEstateTypeLinksController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:real_estate_type_link).permit(
-			:real_estate_id,
 			:need_id,
 			:parking_id,
+			:room_id,
+			:real_estate_id,
 			:real_estate_type_id
 		)
 	end

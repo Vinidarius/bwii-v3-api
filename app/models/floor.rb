@@ -2,6 +2,8 @@ class Floor < ApplicationRecord
 
 	belongs_to :real_estate
 
+	has_many :rooms
+
 	def render_api
 		{
 			id: self.id,
@@ -9,8 +11,7 @@ class Floor < ApplicationRecord
 			area: self.area,
 			divisible: self.divisible,
 			terrace: self.terrace,
-			number: self.number,
-			lot_number: self.lot_number,
+			rooms: self.rooms.map(&:render_api),
 			real_estate_id: self.real_estate_id
 		}
 	end

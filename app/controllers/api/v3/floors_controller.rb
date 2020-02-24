@@ -49,8 +49,6 @@ class Api::V3::FloorsController < Api::V3::BaseController
 			:area,
 			:divisible,
 			:terrace,
-			:number,
-			:lot_number,
 			:real_estate_id
     )
   end

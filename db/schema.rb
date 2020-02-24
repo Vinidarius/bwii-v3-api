@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200102123641) do
+ActiveRecord::Schema.define(version: 20200224094350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,10 +133,12 @@ ActiveRecord::Schema.define(version: 20200102123641) do
     t.bigint "real_estate_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "room_id"
     t.index ["need_id"], name: "index_real_estate_type_links_on_need_id"
     t.index ["parking_id"], name: "index_real_estate_type_links_on_parking_id"
     t.index ["real_estate_id"], name: "index_real_estate_type_links_on_real_estate_id"
     t.index ["real_estate_type_id"], name: "index_real_estate_type_links_on_real_estate_type_id"
+    t.index ["room_id"], name: "index_real_estate_type_links_on_room_id"
   end
 
   create_table "real_estate_types", force: :cascade do |t|
@@ -168,6 +170,16 @@ ActiveRecord::Schema.define(version: 20200102123641) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["compagny_id"], name: "index_real_estates_on_compagny_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.decimal "area", precision: 10, scale: 2, default: "0.0"
+    t.decimal "divisible", precision: 10, scale: 2
+    t.decimal "terrace", precision: 10, scale: 2
+    t.bigint "floor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["floor_id"], name: "index_rooms_on_floor_id"
   end
 
   create_table "sector_links", force: :cascade do |t|
@@ -293,8 +305,10 @@ ActiveRecord::Schema.define(version: 20200102123641) do
   add_foreign_key "real_estate_type_links", "parkings"
   add_foreign_key "real_estate_type_links", "real_estate_types"
   add_foreign_key "real_estate_type_links", "real_estates"
+  add_foreign_key "real_estate_type_links", "rooms"
   add_foreign_key "real_estate_types", "compagnies"
   add_foreign_key "real_estates", "compagnies"
+  add_foreign_key "rooms", "floors"
   add_foreign_key "sector_links", "needs"
   add_foreign_key "sector_links", "real_estates"
   add_foreign_key "sector_links", "sectors"
