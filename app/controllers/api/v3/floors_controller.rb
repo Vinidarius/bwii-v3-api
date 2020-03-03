@@ -49,7 +49,7 @@ class Api::V3::FloorsController < Api::V3::BaseController
 			:area,
 			:divisible,
 			:terrace,
-			:real_estate_id
+			:building_id
     )
   end
 
