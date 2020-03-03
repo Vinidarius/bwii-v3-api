@@ -1,8 +1,8 @@
-class Floor < ApplicationRecord
+class Building < ApplicationRecord
 
-	belongs_to :building
+	belongs_to :real_estate
 
-	has_many :rooms
+	has_many :floors
 
 	before_destroy :destroy_associations
 
@@ -13,13 +13,13 @@ class Floor < ApplicationRecord
 			area: self.area,
 			divisible: self.divisible,
 			terrace: self.terrace,
-			rooms: self.rooms.map(&:render_api),
-			building_id: self.building_id
+			floors: self.floors.map(&:render_api),
+			real_estate_id: self.real_estate_id
 		}
 	end
 
 	def destroy_associations
-		self.rooms.destroy_all
+		self.floors.destroy_all
 	end
 
 end

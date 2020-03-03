@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200224094350) do
+ActiveRecord::Schema.define(version: 20200303140710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(version: 20200224094350) do
     t.index ["email"], name: "index_agents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_agents_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_agents_on_uid_and_provider", unique: true
+  end
+
+  create_table "buildings", force: :cascade do |t|
+    t.string "name"
+    t.decimal "area", precision: 10, scale: 2, default: "0.0"
+    t.decimal "divisible", precision: 10, scale: 2
+    t.decimal "terrace", precision: 10, scale: 2
+    t.integer "number"
+    t.bigint "real_estate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["real_estate_id"], name: "index_buildings_on_real_estate_id"
   end
 
   create_table "compagnies", force: :cascade do |t|
@@ -86,10 +98,10 @@ ActiveRecord::Schema.define(version: 20200224094350) do
     t.decimal "terrace", precision: 10, scale: 2
     t.integer "number"
     t.integer "lot_number"
-    t.bigint "real_estate_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["real_estate_id"], name: "index_floors_on_real_estate_id"
+    t.bigint "building_id"
+    t.index ["building_id"], name: "index_floors_on_building_id"
   end
 
   create_table "needs", force: :cascade do |t|
@@ -179,6 +191,7 @@ ActiveRecord::Schema.define(version: 20200224094350) do
     t.bigint "floor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["floor_id"], name: "index_rooms_on_floor_id"
   end
 
@@ -293,9 +306,10 @@ ActiveRecord::Schema.define(version: 20200224094350) do
   end
 
   add_foreign_key "agents", "compagnies"
+  add_foreign_key "buildings", "real_estates"
   add_foreign_key "favorites", "real_estates"
   add_foreign_key "favorites", "users"
-  add_foreign_key "floors", "real_estates"
+  add_foreign_key "floors", "buildings"
   add_foreign_key "needs", "users"
   add_foreign_key "notes", "agents"
   add_foreign_key "notes", "real_estates"

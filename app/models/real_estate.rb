@@ -1,7 +1,7 @@
 class RealEstate < ApplicationRecord
 
 	belongs_to :compagny
-	has_many :floors
+	has_many :buildings
 	has_many :parkings
 
 	has_many :favorites
@@ -30,7 +30,7 @@ class RealEstate < ApplicationRecord
 			area: self.area,
 			charges: self.charges,
 			foncier: self.foncier,
-			floors: self.floors.map(&:render_api),
+			buildings: self.buildings.map(&:render_api),
 			parkings: self.parkings.map(&:render_api),
 			archived: self.archived,
 			publy: self.publy,
@@ -55,7 +55,7 @@ class RealEstate < ApplicationRecord
 	end
 
 	def destroy_associations
-		self.floors.destroy_all
+		self.buildings.destroy_all
 		self.parkings.destroy_all
 
 		self.favorites.destroy_all
