@@ -45,6 +45,7 @@ class Api::V3::RoomsController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:room).permit(
+			:name,
 			:area,
 			:divisible,
 			:terrace,

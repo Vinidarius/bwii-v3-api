@@ -7,6 +7,7 @@ class Room < ApplicationRecord
 	def render_api
 		{
 			id: self.id,
+			name: self.name,
 			area: self.area,
 			divisible: self.divisible,
 			terrace: self.terrace,
