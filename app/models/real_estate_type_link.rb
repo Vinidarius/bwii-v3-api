@@ -24,4 +24,15 @@ class RealEstateTypeLink < ApplicationRecord
 		}
 	end
 
+	def render_id_api
+		{
+			id: self.id,
+			need_id: self.need_id,
+			parking_id: self.parking_id,
+			room_id: self.room_id,
+			real_estate_id: self.real_estate_id,
+			real_estate_type_id: self.real_estate_type_id,
+		}
+	end
+
 end
