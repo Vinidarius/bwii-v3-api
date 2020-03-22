@@ -49,6 +49,7 @@ class Api::V3::RoomsController < Api::V3::BaseController
 			:area,
 			:divisible,
 			:terrace,
+			:fill,
 			:lot_id,
 			:floor_id
 		)

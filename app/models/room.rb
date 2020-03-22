@@ -11,6 +11,7 @@ class Room < ApplicationRecord
 			area: self.area,
 			divisible: self.divisible,
 			terrace: self.terrace,
+			fill: self.fill,
 			floor_id: self.floor_id,
 			room_type_links: self.real_estate_type_links.map(&:render_details_api),
 		}
