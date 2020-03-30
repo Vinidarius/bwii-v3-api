@@ -12,6 +12,7 @@ class Floor < ApplicationRecord
 			name: self.name,
 			area: self.area,
 			divisible: self.divisible,
+			fill: self.fill,
 			terrace: self.terrace,
 			rooms: self.rooms.map(&:render_api),
 			building_id: self.building_id

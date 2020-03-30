@@ -48,6 +48,7 @@ class Api::V3::FloorsController < Api::V3::BaseController
 			:name,
 			:area,
 			:divisible,
+			:fill,
 			:terrace,
 			:building_id
     )

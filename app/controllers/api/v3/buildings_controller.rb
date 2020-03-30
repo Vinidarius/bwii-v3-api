@@ -48,6 +48,7 @@ class Api::V3::BuildingsController < Api::V3::BaseController
 			:name,
 			:area,
 			:divisible,
+			:fill,
 			:terrace,
 			:real_estate_id
 		)
