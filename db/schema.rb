@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200330004724) do
+ActiveRecord::Schema.define(version: 20200528064421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,9 @@ ActiveRecord::Schema.define(version: 20200330004724) do
     t.bigint "real_estate_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "nature", default: false
+    t.integer "price"
+    t.integer "sell_method"
     t.index ["real_estate_id"], name: "index_parkings_on_real_estate_id"
   end
 

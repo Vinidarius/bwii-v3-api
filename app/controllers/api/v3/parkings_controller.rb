@@ -45,8 +45,11 @@ class Api::V3::ParkingsController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:parking).permit(
-			:places_number,
 			:real_estate_id,
+			:places_number,
+			:price,
+			:nature,
+			:sell_method,
 		)
 	end
 

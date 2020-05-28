@@ -5,8 +5,11 @@ class Parking < ApplicationRecord
 	def render_api
 		{
 			id: self.id,
-			places_number: self.places_number,
 			real_estate_id: self.real_estate_id
+			places_number: self.places_number,
+			price: self.price,
+			nature: self.nature,
+			sell_method: self.sell_method,
 		}
 	end
 
