@@ -52,7 +52,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			return self.with_associations(@real_estates.page(params[:page]).per(params[:nbr]))
 		end
 
-   return self.with_associations(real_estates)
+   return self.with_associations(@real_estates)
   end
 
 end
