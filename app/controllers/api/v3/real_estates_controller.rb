@@ -12,7 +12,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 	end
 
 	def list
-		@real_estates = RealEstate.all
+		@real_estates = Api::V3::RealEstatesFilter.new(RealEstate.all, params).collection
 		render :json => array_serializer(@real_estates, "list")
 	end
 
