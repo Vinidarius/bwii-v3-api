@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200528064421) do
+ActiveRecord::Schema.define(version: 20200602171624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,24 @@ ActiveRecord::Schema.define(version: 20200528064421) do
     t.integer "price"
     t.integer "sell_method"
     t.index ["real_estate_id"], name: "index_parkings_on_real_estate_id"
+  end
+
+  create_table "real_estate_actor_links", force: :cascade do |t|
+    t.bigint "real_estate_actor_id"
+    t.bigint "real_estate_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["real_estate_actor_id"], name: "index_real_estate_actor_links_on_real_estate_actor_id"
+    t.index ["real_estate_id"], name: "index_real_estate_actor_links_on_real_estate_id"
+    t.index ["user_id"], name: "index_real_estate_actor_links_on_user_id"
+  end
+
+  create_table "real_estate_actors", force: :cascade do |t|
+    t.string "title"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "real_estate_type_links", force: :cascade do |t|
@@ -321,6 +339,9 @@ ActiveRecord::Schema.define(version: 20200528064421) do
   add_foreign_key "notes", "real_estates"
   add_foreign_key "notes", "users"
   add_foreign_key "parkings", "real_estates"
+  add_foreign_key "real_estate_actor_links", "real_estate_actors"
+  add_foreign_key "real_estate_actor_links", "real_estates"
+  add_foreign_key "real_estate_actor_links", "users"
   add_foreign_key "real_estate_type_links", "needs"
   add_foreign_key "real_estate_type_links", "parkings"
   add_foreign_key "real_estate_type_links", "real_estate_types"

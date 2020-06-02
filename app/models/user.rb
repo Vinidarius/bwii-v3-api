@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 	has_many :favorites
 	has_many :notes
 	has_many :visits
+	has_many :real_estate_actor_links
 
 	before_destroy :destroy_associations
 
@@ -104,6 +105,7 @@ class User < ActiveRecord::Base
 		self.needs.destroy_all
 		self.notes.destroy_all
 		self.visits.destroy_all
+		self.real_estate_actor_links.destroy_all
 	end
 
 end

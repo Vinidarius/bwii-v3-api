@@ -1,0 +1,2 @@
+module RealEstateActorLinksHelper
+end

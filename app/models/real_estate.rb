@@ -9,6 +9,7 @@ class RealEstate < ApplicationRecord
 	has_many :visits
 
 	has_many :real_estate_type_links
+	has_many :real_estate_actor_links
 	has_many :sell_type_links
 	has_many :sector_links
 
@@ -64,6 +65,7 @@ class RealEstate < ApplicationRecord
 		self.visits.destroy_all
 
 		self.real_estate_type_links.destroy_all
+		self.real_estate_actor_links.destroy_all
 		self.sell_type_links.destroy_all
 		self.sector_links.destroy_all
 	end

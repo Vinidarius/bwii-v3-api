@@ -23,6 +23,9 @@ Rails.application.routes.draw do
 			resources :real_estate_types, only: [:index, :show, :create, :update, :destroy]
 			resources :real_estate_type_links, only: [:index, :show, :create, :update, :destroy]
 
+			resources :real_estate_actors, only: [:index, :show, :create, :update, :destroy]
+			resources :real_estate_actor_links, only: [:index, :show, :create, :update, :destroy]
+
 			resources :sell_types, only: [:index, :show, :create, :update, :destroy]
 			resources :sell_type_links, only: [:index, :show, :create, :update, :destroy]
 
