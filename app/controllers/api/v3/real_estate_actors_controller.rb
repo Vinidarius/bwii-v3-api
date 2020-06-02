@@ -47,7 +47,8 @@ class Api::V3::RealEstateActorsController < Api::V3::BaseController
 	def permitted_params
 		params.require(:real_estate_actor).permit(
 			:title,
-			:icon
+			:icon,
+			:category,
 		)
 	end
 

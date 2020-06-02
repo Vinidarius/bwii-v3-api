@@ -9,6 +9,7 @@ class RealEstateActor < ApplicationRecord
 			id: self.id,
 			title: self.title,
 			icon: self.icon,
+			category: self.category,
 		}
 	end
 
