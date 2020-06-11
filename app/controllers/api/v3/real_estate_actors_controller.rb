@@ -49,6 +49,7 @@ class Api::V3::RealEstateActorsController < Api::V3::BaseController
 			:title,
 			:icon,
 			:category,
+			:multiple
 		)
 	end
 

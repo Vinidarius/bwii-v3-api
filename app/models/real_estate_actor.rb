@@ -10,6 +10,7 @@ class RealEstateActor < ApplicationRecord
 			title: self.title,
 			icon: self.icon,
 			category: self.category,
+			multiple: self.multiple
 		}
 	end
 
