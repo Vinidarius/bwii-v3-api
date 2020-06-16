@@ -38,6 +38,7 @@ class RealEstate < ApplicationRecord
 			verified: self.verified,
 			compagny_id: self.compagny_id,
 			real_estate_type_links: self.real_estate_type_links.map(&:render_id_api),
+			real_estate_actor_links: self.real_estate_actor_links.map(&:render_id_api),
 			favorites: self.favorites.map(&:render_real_estate_api),
 			notes: self.notes.map(&:render_api)
 		}
