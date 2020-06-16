@@ -18,7 +18,7 @@ class RealEstateActorLink < ApplicationRecord
 			id: self.id,
 			real_estate_actor_id: self.real_estate_actor_id,
 			real_estate_id: self.real_estate_id,
-			user_id: self.user_id,
+			user_id: self.user_id ? User.find_by(id: self.user_id).render_info_api : nil,
 		}
 	end
 

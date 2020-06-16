@@ -51,6 +51,14 @@ class User < ActiveRecord::Base
 		}
 	end
 
+	def render_info_api
+		{
+			id: self.id,
+			firstname: self.firstname,
+			lastname: self.lastname,
+		}
+	end
+
 	def connectStatus
 		if self.current_sign_in_at == nil || self.current_sign_in_at < DateTime.now.beginning_of_day - 15.days
 			return "red"
