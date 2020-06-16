@@ -33,7 +33,6 @@ class Api::V3::RealEstateActorsController < Api::V3::BaseController
 
 	def destroy
 		@real_estate_actor = RealEstateActor.find(params[:id]);
-		@real_estate_actor.archived = true;
 		return render :json => [] unless @real_estate_actor.save
 		render(
 			json: @real_estate_actor.render_api,

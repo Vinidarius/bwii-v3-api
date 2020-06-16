@@ -12,13 +12,17 @@ class Api::V3::RealEstateActorLinksController < Api::V3::BaseController
 	end
 
 	def create
-		@real_estate_actor_link = RealEstateActorLink.new(permitted_params)
-		return render :json => [] unless @real_estate_actor_link.save
-		render(
-			json: @real_estate_actor_link.render_api,
-			status: 201,
-			location: api_v3_real_estate_actor_link_path(@real_estate_actor_link.id)
-		)
+		if RealEstateActorLink.exists?(real_estate_id: params[:real_estate_id], user_id: params[:user_id], real_estate_actor_id: params[:real_estate_actor_id])
+			return;
+		else
+			@real_estate_actor_link = RealEstateActorLink.new(permitted_params)
+			return render :json => [] unless @real_estate_actor_link.save
+			render(
+				json: @real_estate_actor_link.render_api,
+				status: 201,
+				location: api_v3_real_estate_actor_link_path(@real_estate_actor_link.id)
+			)
+		end
 	end
 
 	def update
@@ -33,7 +37,6 @@ class Api::V3::RealEstateActorLinksController < Api::V3::BaseController
 
 	def destroy
 		@real_estate_actor_link = RealEstateActorLink.find(params[:id]);
-		@real_estate_actor_link.archived = true;
 		return render :json => [] unless @real_estate_actor_link.save
 		render(
 			json: @real_estate_actor_link.render_api,
