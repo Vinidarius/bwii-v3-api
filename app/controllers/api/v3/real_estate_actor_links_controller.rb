@@ -38,9 +38,9 @@ class Api::V3::RealEstateActorLinksController < Api::V3::BaseController
 
 	def destroy
 		@real_estate_actor_link = RealEstateActorLink.find(params[:id]);
-		return render :json => [] unless @real_estate_actor_link.save
+		return render :json => [] unless @real_estate_actor_link.destroy
 		render(
-			json: @real_estate_actor_link.render_api,
+			json: {},
 			status: 201,
 			location: api_v3_real_estate_actor_link_path(@real_estate_actor_link.id)
 		)
