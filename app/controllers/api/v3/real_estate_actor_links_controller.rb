@@ -12,8 +12,9 @@ class Api::V3::RealEstateActorLinksController < Api::V3::BaseController
 	end
 
 	def create
-		if RealEstateActorLink.exists?(real_estate_id: params[:real_estate_id], user_id: params[:user_id], real_estate_actor_id: params[:real_estate_actor_id])
-			return;
+		if RealEstateActorLink.exists?(real_estate_id: params[:real_estate_id], real_estate_actor_id: params[:real_estate_actor_id])
+			params[:id] = RealEstateActorLink.find_by(real_estate_id: params[:real_estate_id], real_estate_actor_id: params[:real_estate_actor_id]).id
+			self.update();
 		else
 			@real_estate_actor_link = RealEstateActorLink.new(permitted_params)
 			return render :json => [] unless @real_estate_actor_link.save
