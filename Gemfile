@@ -22,6 +22,9 @@ gem 'uglifier', '>= 1.3.0'
 # gem for paginate
 gem 'kaminari'
 
+# gem for upload
+gem 'cloudinary'
+
 # gem for authentication
 gem 'devise'
 gem 'devise_token_auth'

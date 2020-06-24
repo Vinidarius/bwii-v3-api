@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200611143433) do
+ActiveRecord::Schema.define(version: 20200617161457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,16 @@ ActiveRecord::Schema.define(version: 20200611143433) do
     t.datetime "updated_at", null: false
     t.string "category"
     t.boolean "multiple", default: false
+  end
+
+  create_table "real_estate_pictures", force: :cascade do |t|
+    t.string "public_id"
+    t.string "url"
+    t.integer "position"
+    t.bigint "real_estate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["real_estate_id"], name: "index_real_estate_pictures_on_real_estate_id"
   end
 
   create_table "real_estate_type_links", force: :cascade do |t|
@@ -344,6 +354,7 @@ ActiveRecord::Schema.define(version: 20200611143433) do
   add_foreign_key "real_estate_actor_links", "real_estate_actors"
   add_foreign_key "real_estate_actor_links", "real_estates"
   add_foreign_key "real_estate_actor_links", "users"
+  add_foreign_key "real_estate_pictures", "real_estates"
   add_foreign_key "real_estate_type_links", "needs"
   add_foreign_key "real_estate_type_links", "parkings"
   add_foreign_key "real_estate_type_links", "real_estate_types"

@@ -3,6 +3,7 @@ class RealEstate < ApplicationRecord
 	belongs_to :compagny
 	has_many :buildings
 	has_many :parkings
+	has_many :real_estate_pictures
 
 	has_many :favorites
 	has_many :notes
@@ -20,6 +21,7 @@ class RealEstate < ApplicationRecord
 			id: self.id,
 			created_at: self.created_at,
 			title: self.title,
+			real_estate_pictures: self.real_estate_pictures.map(&:render_api),
 			address: self.address,
 			zipcode: self.zipcode,
 			city: self.city,
@@ -48,6 +50,7 @@ class RealEstate < ApplicationRecord
 		{
 			id: self.id,
 			title: self.title,
+			real_estate_pictures: self.real_estate_pictures.map(&:render_api).first,
 			address: self.address,
 			zipcode: self.zipcode,
 			city: self.city,
@@ -58,6 +61,8 @@ class RealEstate < ApplicationRecord
 	end
 
 	def destroy_associations
+		self.destroy_pictures()
+
 		self.buildings.destroy_all
 		self.parkings.destroy_all
 
@@ -69,6 +74,12 @@ class RealEstate < ApplicationRecord
 		self.real_estate_actor_links.destroy_all
 		self.sell_type_links.destroy_all
 		self.sector_links.destroy_all
+	end
+
+	def destroy_pictures
+		self.real_estate_pictures.each do |real_estate_picture|
+			Cloudinary::Uploader.destroy(real_estate_picture.public_id)
+		end
 	end
 
 end

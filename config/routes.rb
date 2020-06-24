@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 			resources :user_type_links, only: [:index, :show, :create, :update, :destroy]
 
 			resources :real_estates, only: [:index, :show, :create, :update, :destroy]
+			resources :real_estate_pictures, only: [:index, :show, :create, :update, :destroy]
 			resources :buildings, only: [:create, :update, :destroy]
 			resources :floors, only: [:create, :update, :destroy]
 			resources :rooms, only: [:create, :update, :destroy]
