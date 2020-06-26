@@ -36,6 +36,7 @@ class Api::V3::RealEstatePicturesController < Api::V3::BaseController
 
 	def destroy
 		@real_estate_picture = RealEstatePicture.find(params[:id])
+		Cloudinary::Uploader.destroy(@real_estate_picture.public_id)
 		return api_error(status: 422, errors: @real_estate_picture.errors) unless @real_estate_picture.destroy
 		render(
 			json: {},
