@@ -16,6 +16,7 @@ class Api::V3::RealEstatePicturesController < Api::V3::BaseController
 		@real_estate_picture = RealEstatePicture.new(permitted_params)
 		@real_estate_picture.public_id = @request["public_id"]
 		@real_estate_picture.url = @request["secure_url"]
+		@real_estate_picture.url = @real_estate_picture.url[0, self.url.index('upload') + "upload".size] + "/a_" + params[:angle].to_s + self.url[(self.url.index('upload') + "upload".size)..self.url.size]
 		return render :json => [] unless @real_estate_picture.save
 		render(
 			json: @real_estate_picture.render_api,
