@@ -52,6 +52,7 @@ class Api::V3::RealEstatePicturesController < Api::V3::BaseController
 			:public_id,
 			:url,
 			:position,
+			:angle,
 			:real_estate_id
 		)
 	end

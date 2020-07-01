@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200617161457) do
+ActiveRecord::Schema.define(version: 20200701121320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 20200617161457) do
     t.bigint "real_estate_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "angle", default: 0
     t.index ["real_estate_id"], name: "index_real_estate_pictures_on_real_estate_id"
   end
 
