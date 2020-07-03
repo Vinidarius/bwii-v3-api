@@ -16,7 +16,7 @@ class Api::V3::RealEstatePicturesController < Api::V3::BaseController
 		@real_estate_picture = RealEstatePicture.new(permitted_params)
 		@real_estate_picture.public_id = @request["public_id"]
 		@real_estate_picture.url = @request["secure_url"]
-		@real_estate_picture.url = @real_estate_picture.url[0, self.url.index('upload') + "upload".size] + "/a_" + params[:angle].to_s + self.url[(self.url.index('upload') + "upload".size)..self.url.size]
+		@real_estate_picture.url = @real_estate_picture.url[0, @real_estate_picture.url.index('upload') + "upload".size] + "/a_" + params[:angle].to_s + @real_estate_picture.url[(@real_estate_picture.url.index('upload') + "upload".size)..@real_estate_picture.url.size]
 		return render :json => [] unless @real_estate_picture.save
 		render(
 			json: @real_estate_picture.render_api,
@@ -27,6 +27,7 @@ class Api::V3::RealEstatePicturesController < Api::V3::BaseController
 
 	def update
 		@real_estate_picture = RealEstatePicture.find_by_id(params[:id])
+		@real_estate_picture.url = @real_estate_picture.url[0, @real_estate_picture.url.index('/a_') + "/a_".size] + params[:angle].to_s + @real_estate_picture.url[(@real_estate_picture.url.index('/a_') + @real_estate_picture.url.split('/')[6].size + 1)..@real_estate_picture.url.size]
 		return render :json => [] unless @real_estate_picture.update_attributes(permitted_params)
 		render(
 			json: @real_estate_picture.render_api,
