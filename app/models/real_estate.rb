@@ -21,7 +21,7 @@ class RealEstate < ApplicationRecord
 			id: self.id,
 			created_at: self.created_at,
 			title: self.title,
-			real_estate_pictures: self.real_estate_pictures.map(&:render_api),
+			real_estate_pictures: self.real_estate_pictures.order(position: :asc).map(&:render_api),
 			address: self.address,
 			zipcode: self.zipcode,
 			city: self.city,
@@ -50,7 +50,7 @@ class RealEstate < ApplicationRecord
 		{
 			id: self.id,
 			title: self.title,
-			real_estate_pictures: self.real_estate_pictures.map(&:render_api).first,
+			real_estate_pictures: self.real_estate_pictures.order(position: :asc).map(&:render_api).first,
 			address: self.address,
 			zipcode: self.zipcode,
 			city: self.city,
