@@ -2,14 +2,15 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 
   def collection
     @real_estates = self.resource
-		Agent.all.pluck(:compagny_id, :tokens).each do |el|
-			if params[:token].eql? el[1].keys.first
-				@compagny = el[0]
-			end
-		end
+		# Agent.all.pluck(:compagny_id, :tokens).each do |el|
+		# 	if params[:token].eql? el[1].keys.first
+		# 		@compagny = el[0]
+		# 	end
+		# end
 
-		@compagny ? (@real_estates = @real_estates.where(compagny_id: @compagny)) : (return [])
-		@real_estate_types = RealEstateType.all.where(compagny_id: @compagny)
+		# @compagny ? (@real_estates = @real_estates.where(compagny_id: @compagny)) : (return [])
+		# @real_estate_types = RealEstateType.all.where(compagny_id: @compagny)
+		@real_estate_types = RealEstateType.all
 
 		unless params[:archived].blank?
 			@real_estates = @real_estates.where(archived: params[:archived])

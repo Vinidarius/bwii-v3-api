@@ -2,14 +2,15 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 
   def collection
     @users = self.resource
-		Agent.all.pluck(:compagny_id, :tokens).each do |el|
-			if params[:token].eql? el[1].keys.first
-				@compagny = el[0]
-			end
-		end
+		# Agent.all.pluck(:compagny_id, :tokens).each do |el|
+		# 	if params[:token].eql? el[1].keys.first
+		# 		@compagny = el[0]
+		# 	end
+		# end
 
-		@compagny ? (@users = @users.where(compagny_id: @compagny)) : (return [])
-		@user_types = UserType.all.where(compagny_id: @compagny)
+		# @compagny ? (@users = @users.where(compagny_id: @compagny)) : (return [])
+		# @user_types = UserType.all.where(compagny_id: @compagny)
+		@user_types = UserType.all
 
 		unless params[:archived].blank?
 			@users = @users.where(archived: params[:archived])
