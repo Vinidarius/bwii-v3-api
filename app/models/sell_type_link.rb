@@ -11,4 +11,11 @@ class SellTypeLink < ApplicationRecord
 		}
 	end
 
+	def render_details_api
+		{
+			id: self.id,
+			sell_type_id: SellType.find_by(id: self.sell_type_id).render_api
+		}
+	end
+
 end
