@@ -47,6 +47,7 @@ Rails.application.routes.draw do
 			get '/users_details/:id', to: 'users#details'
 
 			get '/real_estates_list', to: 'real_estates#list'
+			get '/real_estate_details/:id', to: 'real_estates#details'
 
 		end
 	end

@@ -16,10 +16,10 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 		render :json => array_serializer(@real_estates, "list")
 	end
 
-	def connect
+	def details
 		@real_estate = RealEstate.find_by_id(params[:id])
 		return render :json => [] unless !@real_estate.blank?
-		render :json => @real_estate.render_connect_api
+		render :json => @real_estate.render_details_api
 	end
 
 	def create
