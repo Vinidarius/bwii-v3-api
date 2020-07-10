@@ -18,4 +18,11 @@ class SellTypeLink < ApplicationRecord
 		}
 	end
 
+	def render_id_api
+		{
+			id: self.id,
+			real_estate_id: self.real_estate_id
+		}
+	end
+
 end
