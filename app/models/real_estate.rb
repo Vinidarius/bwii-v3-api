@@ -11,7 +11,7 @@ class RealEstate < ApplicationRecord
 
 	has_many :real_estate_type_links
 	has_many :real_estate_actor_links
-	has_many :real_estate_real_estate_sell_type_links
+	has_many :real_estate_sell_type_links
 	has_many :sector_links
 
 	before_destroy :destroy_associations
