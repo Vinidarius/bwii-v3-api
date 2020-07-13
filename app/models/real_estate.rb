@@ -11,7 +11,7 @@ class RealEstate < ApplicationRecord
 
 	has_many :real_estate_type_links
 	has_many :real_estate_actor_links
-	has_many :sell_type_links
+	has_many :real_estate_real_estate_sell_type_links
 	has_many :sector_links
 
 	before_destroy :destroy_associations
@@ -40,7 +40,7 @@ class RealEstate < ApplicationRecord
 			verified: self.verified,
 			compagny_id: self.compagny_id,
 			real_estate_type_links: self.real_estate_type_links.map(&:render_id_api),
-			sell_type_links: self.sell_type_links.map(&:render_id_api),
+			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api),
 			real_estate_actor_links: self.real_estate_actor_links.map(&:render_id_api),
 			favorites: self.favorites.map(&:render_real_estate_api),
 			notes: self.notes.map(&:render_api)
@@ -71,7 +71,7 @@ class RealEstate < ApplicationRecord
 			verified: self.verified,
 			compagny_id: self.compagny_id,
 			real_estate_type_links: self.real_estate_type_links.map(&:render_details_api),
-			sell_type_links: self.sell_type_links.map(&:render_details_api),
+			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_details_api),
 			real_estate_actor_links: self.real_estate_actor_links.map(&:render_id_api),
 			favorites: self.favorites.map(&:render_real_estate_api),
 			notes: self.notes.map(&:render_api)
@@ -104,7 +104,7 @@ class RealEstate < ApplicationRecord
 
 		self.real_estate_type_links.destroy_all
 		self.real_estate_actor_links.destroy_all
-		self.sell_type_links.destroy_all
+		self.real_estate_sell_type_links.destroy_all
 		self.sector_links.destroy_all
 	end
 

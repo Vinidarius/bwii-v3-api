@@ -14,7 +14,7 @@ class Compagny < ActiveRecord::Base
 
 	has_many :user_types
 	has_many :real_estates_types
-	has_many :sell_types
+	has_many :real_estate_sell_types
 
 	before_destroy :destroy_associations
 
@@ -47,7 +47,7 @@ class Compagny < ActiveRecord::Base
 
 		self.user_types.destroy_all
 		self.real_estates_types.destroy_all
-		self.sell_types.destroy_all
+		self.real_estate_sell_types.destroy_all
 	end
 
 end

@@ -1,4 +1,4 @@
-class SellType < ApplicationRecord
+class RealEstateSellType < ApplicationRecord
 
 	belongs_to :compagny
 	has_many :sell_type_links
