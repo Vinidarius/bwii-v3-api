@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200713180815) do
+ActiveRecord::Schema.define(version: 20200727115531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,11 +176,11 @@ ActiveRecord::Schema.define(version: 20200713180815) do
 
   create_table "real_estate_sell_type_links", force: :cascade do |t|
     t.bigint "real_estate_id"
-    t.bigint "sell_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "real_estate_sell_type_id"
     t.index ["real_estate_id"], name: "index_real_estate_sell_type_links_on_real_estate_id"
-    t.index ["sell_type_id"], name: "index_real_estate_sell_type_links_on_sell_type_id"
+    t.index ["real_estate_sell_type_id"], name: "index_real_estate_sell_type_links_on_real_estate_sell_type_id"
   end
 
   create_table "real_estate_sell_types", force: :cascade do |t|
@@ -356,7 +356,7 @@ ActiveRecord::Schema.define(version: 20200713180815) do
   add_foreign_key "real_estate_actor_links", "real_estates"
   add_foreign_key "real_estate_actor_links", "users"
   add_foreign_key "real_estate_pictures", "real_estates"
-  add_foreign_key "real_estate_sell_type_links", "real_estate_sell_types", column: "sell_type_id"
+  add_foreign_key "real_estate_sell_type_links", "real_estate_sell_types"
   add_foreign_key "real_estate_sell_type_links", "real_estates"
   add_foreign_key "real_estate_sell_types", "compagnies"
   add_foreign_key "real_estate_type_links", "needs"
