@@ -1,8 +1,7 @@
 class Note < ApplicationRecord
 
 	belongs_to :agent
-	belongs_to :real_estate
-	belongs_to :user
+	has_many :note_link
 
 	def render_api
 		{
@@ -12,9 +11,7 @@ class Note < ApplicationRecord
 			date: self.date,
 			title: self.title,
 			body: self.body,
-			agent_id: self.agent_id,
-			real_estate_id: self.real_estate_id,
-			user_id: self.user_id
+			agent_id: self.agent_id
 		}
 	end
 

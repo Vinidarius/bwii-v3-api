@@ -49,8 +49,7 @@ class Api::V3::NotesController < Api::V3::BaseController
 			:date,
 			:body,
 			:agent_id,
-			:real_estate_id,
-			:user_id
+			:note_link_id
 		)
 	end
 

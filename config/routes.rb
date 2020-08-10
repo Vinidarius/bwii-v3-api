@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 			resources :needs, only: [:index, :shown, :create, :update, :destroy]
 			resources :favorites, only: [:index, :shown, :create, :update, :destroy]
 			resources :notes, only: [:index, :shown, :create, :update, :destroy]
+			resources :note_links, only: [:index, :shown, :create, :update, :destroy]
 			resources :visits, only: [:index, :shown, :create, :update, :destroy]
 
 			resources :sectors, only: [:index, :shown, :create, :update, :destroy]

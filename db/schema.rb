@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200727115531) do
+ActiveRecord::Schema.define(version: 20200810094526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,18 +118,27 @@ ActiveRecord::Schema.define(version: 20200727115531) do
     t.index ["user_id"], name: "index_needs_on_user_id"
   end
 
+  create_table "note_links", force: :cascade do |t|
+    t.bigint "note_id"
+    t.bigint "user_id"
+    t.bigint "real_estate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_note_links_on_note_id"
+    t.index ["real_estate_id"], name: "index_note_links_on_real_estate_id"
+    t.index ["user_id"], name: "index_note_links_on_user_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.string "date"
     t.string "body"
     t.bigint "agent_id"
-    t.bigint "real_estate_id"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "note_links_id"
     t.index ["agent_id"], name: "index_notes_on_agent_id"
-    t.index ["real_estate_id"], name: "index_notes_on_real_estate_id"
-    t.index ["user_id"], name: "index_notes_on_user_id"
+    t.index ["note_links_id"], name: "index_notes_on_note_links_id"
   end
 
   create_table "parkings", force: :cascade do |t|
@@ -348,9 +357,11 @@ ActiveRecord::Schema.define(version: 20200727115531) do
   add_foreign_key "favorites", "users"
   add_foreign_key "floors", "buildings"
   add_foreign_key "needs", "users"
+  add_foreign_key "note_links", "notes"
+  add_foreign_key "note_links", "real_estates"
+  add_foreign_key "note_links", "users"
   add_foreign_key "notes", "agents"
-  add_foreign_key "notes", "real_estates"
-  add_foreign_key "notes", "users"
+  add_foreign_key "notes", "note_links", column: "note_links_id"
   add_foreign_key "parkings", "real_estates"
   add_foreign_key "real_estate_actor_links", "real_estate_actors"
   add_foreign_key "real_estate_actor_links", "real_estates"

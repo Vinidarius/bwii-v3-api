@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
 
 	has_many :needs
 	has_many :favorites
-	has_many :notes
 	has_many :visits
 	has_many :real_estate_actor_links
+	has_many :note_links
 
 	before_destroy :destroy_associations
 
@@ -35,7 +35,6 @@ class User < ActiveRecord::Base
 			compagny_id: self.compagny_id,
 			needs: self.needs.map(&:render_api),
 			favorites: self.favorites.map(&:render_user_api),
-			notes: self.notes.map(&:render_api)
 		}
 	end
 

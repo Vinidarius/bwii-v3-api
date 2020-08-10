@@ -6,7 +6,7 @@ class RealEstate < ApplicationRecord
 	has_many :real_estate_pictures
 
 	has_many :favorites
-	has_many :notes
+	has_many :note_links
 	has_many :visits
 
 	has_many :real_estate_type_links
@@ -43,7 +43,6 @@ class RealEstate < ApplicationRecord
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api),
 			real_estate_actor_links: self.real_estate_actor_links.map(&:render_id_api),
 			favorites: self.favorites.map(&:render_real_estate_api),
-			notes: self.notes.map(&:render_api)
 		}
 	end
 
@@ -74,7 +73,6 @@ class RealEstate < ApplicationRecord
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_details_api),
 			real_estate_actor_links: self.real_estate_actor_links.map(&:render_id_api),
 			favorites: self.favorites.map(&:render_real_estate_api),
-			notes: self.notes.map(&:render_api)
 		}
 	end
 
