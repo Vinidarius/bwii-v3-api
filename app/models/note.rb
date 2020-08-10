@@ -6,8 +6,8 @@ class Note < ApplicationRecord
 	def render_api
 		{
 			id: self.id,
-			created_at: self.created_at,
-			updated_at: self.updated_at,
+			created_at: self.created_at.strftime("%d-%m-%Y"),
+			updated_at: self.updated_at.strftime("%d-%m-%Y"),
 			date: self.date,
 			title: self.title,
 			body: self.body,
