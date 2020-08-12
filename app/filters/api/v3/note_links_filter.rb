@@ -15,6 +15,10 @@ class Api::V3::NoteLinksFilter < Api::V3::BaseFilter
 			note_links = note_links.where('note_links.user_id = ?', params[:user_id])
 		end
 
+		unless params[:note_id].blank?
+			note_links = note_links.where('note_links.note_id = ?', params[:note_id])
+		end
+
    return self.with_associations(note_links)
   end
 
