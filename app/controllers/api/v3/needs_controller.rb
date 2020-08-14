@@ -2,13 +2,18 @@ class Api::V3::NeedsController < Api::V3::BaseController
 
 	def index
 		@needs = Api::V3::NeedsFilter.new(Need.all, params).collection
-		render :json => array_serializer(@needs)
+		render :json => array_serializer(@needs, "classic")
 	end
 
 	def show
 		@need = Need.find_by_id(params[:id])
 		return render :json => [] unless !@need.blank?
 		render :json => @need.render_api
+	end
+
+	def list
+		@needs = Api::V3::NeedsFilter.new(Need.all, params).collection
+		render :json => array_serializer(@needs, "list")
 	end
 
 	def create
@@ -54,10 +59,15 @@ class Api::V3::NeedsController < Api::V3::BaseController
 		)
 	end
 
-	def array_serializer needs
+	def array_serializer needs, route
 		needs_serialized = Array.new
 		needs.each do |need|
-			needs_serialized.push(need.render_api)
+			case route
+				when "classic"
+					needs_serialized.push(need.render_api)
+				when "list"
+					needs_serialized.push(need.render_list_api)
+			end
 		end
 		needs_serialized
 	end

@@ -1,12 +1,14 @@
 class RealEstateSellTypeLink < ApplicationRecord
 
+	belongs_to :need
 	belongs_to :real_estate
 	belongs_to :real_estate_sell_type
 
 	def render_api
 		{
 			id: self.id,
-			real_estate_id: RealEstate.find_by(id: self.real_estate_id).render_api,
+			need_id: self.need_id ? Need.find_by(id: self.need_id).render_api : nil,
+			real_estate_id: self.real_estate_id ? RealEstate.find_by(id: self.real_estate_id).render_api : nil,
 			real_estate_sell_type_id: RealEstateSellType.find_by(id: self.real_estate_sell_type_id).render_api
 		}
 	end
@@ -21,7 +23,8 @@ class RealEstateSellTypeLink < ApplicationRecord
 	def render_id_api
 		{
 			id: self.id,
-			real_estate_id: self.real_estate_id
+			real_estate_id: self.real_estate_id,
+			need_id: self.need_id
 		}
 	end
 

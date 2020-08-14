@@ -13,6 +13,7 @@ class RealEstate < ApplicationRecord
 	has_many :real_estate_actor_links
 	has_many :real_estate_sell_type_links
 	has_many :sector_links
+	has_many :need_links
 
 	before_destroy :destroy_associations
 
@@ -104,6 +105,7 @@ class RealEstate < ApplicationRecord
 		self.real_estate_actor_links.destroy_all
 		self.real_estate_sell_type_links.destroy_all
 		self.sector_links.destroy_all
+		self.need_links.destroy_all
 	end
 
 	def destroy_pictures

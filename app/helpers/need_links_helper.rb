@@ -1,0 +1,2 @@
+module NeedLinksHelper
+end

@@ -7,6 +7,10 @@ class Api::V3::RealEstateSellTypeLinksFilter < Api::V3::BaseFilter
 			real_estate_sell_type_links = real_estate_sell_type_links.where('real_estate_sell_type_links.real_estate_id = ?', params[:real_estate_id])
 		end
 
+		unless params[:need_id].blank?
+			real_estate_sell_type_links = real_estate_sell_type_links.where('real_estate_sell_type_links.need_id = ?', params[:need_id])
+		end
+
 		unless params[:real_estate_sell_type_id].blank?
 			real_estate_sell_type_links = real_estate_sell_type_links.where('real_estate_sell_type_links.real_estate_sell_type_id = ?', params[:real_estate_sell_type_id])
 		end

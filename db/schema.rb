@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200810094526) do
+ActiveRecord::Schema.define(version: 20200814080620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,15 @@ ActiveRecord::Schema.define(version: 20200810094526) do
     t.index ["building_id"], name: "index_floors_on_building_id"
   end
 
+  create_table "need_links", force: :cascade do |t|
+    t.bigint "need_id"
+    t.bigint "real_estate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["need_id"], name: "index_need_links_on_need_id"
+    t.index ["real_estate_id"], name: "index_need_links_on_real_estate_id"
+  end
+
   create_table "needs", force: :cascade do |t|
     t.string "name"
     t.float "area_min", default: 0.0
@@ -188,6 +197,8 @@ ActiveRecord::Schema.define(version: 20200810094526) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "real_estate_sell_type_id"
+    t.bigint "need_id"
+    t.index ["need_id"], name: "index_real_estate_sell_type_links_on_need_id"
     t.index ["real_estate_id"], name: "index_real_estate_sell_type_links_on_real_estate_id"
     t.index ["real_estate_sell_type_id"], name: "index_real_estate_sell_type_links_on_real_estate_sell_type_id"
   end
@@ -356,6 +367,8 @@ ActiveRecord::Schema.define(version: 20200810094526) do
   add_foreign_key "favorites", "real_estates"
   add_foreign_key "favorites", "users"
   add_foreign_key "floors", "buildings"
+  add_foreign_key "need_links", "needs"
+  add_foreign_key "need_links", "real_estates"
   add_foreign_key "needs", "users"
   add_foreign_key "note_links", "notes"
   add_foreign_key "note_links", "real_estates"
@@ -367,6 +380,7 @@ ActiveRecord::Schema.define(version: 20200810094526) do
   add_foreign_key "real_estate_actor_links", "real_estates"
   add_foreign_key "real_estate_actor_links", "users"
   add_foreign_key "real_estate_pictures", "real_estates"
+  add_foreign_key "real_estate_sell_type_links", "needs"
   add_foreign_key "real_estate_sell_type_links", "real_estate_sell_types"
   add_foreign_key "real_estate_sell_type_links", "real_estates"
   add_foreign_key "real_estate_sell_types", "compagnies"

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 			resources :real_estate_sell_type_links, only: [:index, :show, :create, :update, :destroy]
 
 			resources :needs, only: [:index, :shown, :create, :update, :destroy]
+			resources :need_links, only: [:index, :shown, :create, :update, :destroy]
 			resources :favorites, only: [:index, :shown, :create, :update, :destroy]
 			resources :notes, only: [:index, :shown, :create, :update, :destroy]
 			resources :note_links, only: [:index, :shown, :create, :update, :destroy]
@@ -49,6 +50,8 @@ Rails.application.routes.draw do
 
 			get '/real_estates_list', to: 'real_estates#list'
 			get '/real_estate_details/:id', to: 'real_estates#details'
+
+			get '/needs_list', to: 'needs#list'
 
 		end
 	end
