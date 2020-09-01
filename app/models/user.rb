@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
 	belongs_to :compagny
 	has_many :user_type_links
 
-	has_many :needs
 	has_many :favorites
 	has_many :visits
 	has_many :real_estate_actor_links
 	has_many :note_links
+	has_many :need_links
 
 	before_destroy :destroy_associations
 
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 			ccs: self.ccs,
 			archived: self.archived,
 			compagny_id: self.compagny_id,
-			needs: self.needs.map(&:render_api),
+			need_links: self.need_links.map(&:render_user_api),
 			favorites: self.favorites.map(&:render_user_api),
 		}
 	end

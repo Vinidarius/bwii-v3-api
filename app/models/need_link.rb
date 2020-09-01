@@ -22,4 +22,13 @@ class NeedLink < ApplicationRecord
 		}
 	end
 
+	def render_user_api
+		{
+			id: self.id,
+			created_at: self.created_at,
+			need_id: Need.find_by(id: self.need_id).render_api,
+			real_estate_id: self.real_estate_id ? RealEstate.find_by(id: self.real_estate_id).render_list_api : nil
+		}
+	end
+
 end
