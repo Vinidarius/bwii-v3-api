@@ -1,7 +1,5 @@
 class Need < ApplicationRecord
 
-	belongs_to :user
-
 	has_many :sector_links
 	has_many :real_estate_sell_type_links
 	has_many :real_estate_type_links
@@ -18,8 +16,7 @@ class Need < ApplicationRecord
 			city: self.city,
 			zipcode: self.zipcode,
 			real_estate_type_links: self.real_estate_type_links.map(&:render_id_api),
-			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api),
-			user_id: self.user_id
+			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api)
 		}
 	end
 
@@ -33,8 +30,7 @@ class Need < ApplicationRecord
 			zipcode: self.zipcode,
 			real_estate_type_links: self.real_estate_type_links.map(&:render_id_api),
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api),
-			real_estates: self.need_links.map(&:render_id_api),
-			user_id: self.user_id
+			real_estates: self.need_links.map(&:render_id_api)
 		}
 	end
 

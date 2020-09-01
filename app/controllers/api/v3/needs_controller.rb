@@ -54,8 +54,7 @@ class Api::V3::NeedsController < Api::V3::BaseController
 			:area_min,
 			:area_max,
 			:city,
-			:zipcode,
-			:user_id
+			:zipcode
 		)
 	end
 

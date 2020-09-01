@@ -45,6 +45,7 @@ class Api::V3::NeedLinksController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:need_link).permit(
+			:user_id,
 			:real_estate_id,
 			:need_id
 		)

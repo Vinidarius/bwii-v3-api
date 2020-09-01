@@ -1,7 +1,7 @@
 class Note < ApplicationRecord
 
 	belongs_to :agent
-	has_many :note_link
+	has_many :note_links
 
 	def render_api
 		{
