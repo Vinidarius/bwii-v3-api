@@ -15,7 +15,7 @@ class Need < ApplicationRecord
 			area_max: self.area_max,
 			city: self.city,
 			zipcode: self.zipcode,
-			real_estate_type_links: self.real_estate_type_links.map(&:render_id_api),
+			real_estate_type_links: self.real_estate_type_links.map(&:render_details_api),
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api)
 		}
 	end
@@ -28,7 +28,7 @@ class Need < ApplicationRecord
 			area_max: self.area_max,
 			city: self.city,
 			zipcode: self.zipcode,
-			real_estate_type_links: self.real_estate_type_links.map(&:render_id_api),
+			real_estate_type_links: self.real_estate_type_links.map(&:render_details_api),
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api),
 			real_estates: self.need_links.map(&:render_id_api)
 		}
