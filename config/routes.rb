@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 			get '/real_estate_details/:id', to: 'real_estates#details'
 
 			get '/needs_list', to: 'needs#list'
+			get '/need_link_delete', to: 'need_links#destroy'
 
 		end
 	end

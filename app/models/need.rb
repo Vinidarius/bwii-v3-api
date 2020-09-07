@@ -30,7 +30,8 @@ class Need < ApplicationRecord
 			zipcode: self.zipcode,
 			real_estate_type_links: self.real_estate_type_links.map(&:render_details_api),
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api),
-			real_estates: self.need_links.map(&:render_id_api)
+			real_estates: self.need_links.map(&:render_id_api),
+			ids: self.need_links.map(&:render_id_list_api)
 		}
 	end
 

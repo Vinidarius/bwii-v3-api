@@ -22,6 +22,14 @@ class NeedLink < ApplicationRecord
 		}
 	end
 
+	def render_id_list_api
+		{
+			id: self.id,
+			real_estate_id: self.real_estate_id,
+			need_id: self.need_id
+		}
+	end
+
 	def render_user_api
 		{
 			id: self.id,
