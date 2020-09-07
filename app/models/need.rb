@@ -39,6 +39,7 @@ class Need < ApplicationRecord
 		self.sector_links.destroy_all
 		self.real_estate_sell_type_links.destroy_all
 		self.real_estate_type_links.destroy_all
+		self.need_links.destroy_all
 	end
 
 end
