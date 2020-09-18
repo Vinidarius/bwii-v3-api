@@ -11,12 +11,6 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 		render :json => @real_estate.render_api
 	end
 
-	def one_as_list
-		@real_estate = RealEstate.find_by_id(params[:id])
-		return render :json => [] unless !@real_estate.blank?
-		render :json => @real_estate.render_list_api
-	end
-
 	def list
 		@real_estates = Api::V3::RealEstatesFilter.new(RealEstate.all, params).collection
 		render :json => array_serializer(@real_estates, "list")

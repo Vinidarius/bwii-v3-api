@@ -8,7 +8,7 @@ class NeedLink < ApplicationRecord
 		{
 			id: self.id,
 			created_at: self.created_at,
-			need_id: Need.find_by(id: self.need_id).render_api,
+			need_id: self.need_id ? Need.find_by(id: self.need_id).render_api : nil,
 			real_estate_id: self.real_estate_id ? RealEstate.find_by(id: self.real_estate_id).render_list_api : nil,
 			user_id: self.user_id
 		}
@@ -35,7 +35,7 @@ class NeedLink < ApplicationRecord
 		{
 			id: self.id,
 			created_at: self.created_at,
-			need_id: Need.find_by(id: self.need_id).render_api,
+			need_id: self.need_id ? Need.find_by(id: self.need_id).render_api : nil,
 			real_estate_id: self.real_estate_id ? RealEstate.find_by(id: self.real_estate_id).render_list_api : nil
 		}
 	end
