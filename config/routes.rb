@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
 			get '/needs_list', to: 'needs#list'
 			get '/need_link_delete', to: 'need_links#destroy'
+			delete '/user_needs', to: 'need_links#delete_user'
 
 		end
 	end

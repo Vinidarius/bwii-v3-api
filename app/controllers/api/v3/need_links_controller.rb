@@ -11,6 +11,15 @@ class Api::V3::NeedLinksController < Api::V3::BaseController
 		render :json => @need_link.render_api
 	end
 
+	def delete_user
+		@need_links = NeedLink.where(need_id: params[:need_id], user_id: params[:user_id])
+		return api_error(status: 422, errors: @need_links.errors) unless @need_links.destroy_all
+		render(
+			json: {},
+			status: 204
+		)
+	end
+
 	def create
 		@need_link = NeedLink.new(permitted_params)
 		return render :json => [] unless @need_link.save
