@@ -55,6 +55,8 @@ class User < ActiveRecord::Base
 			id: self.id,
 			firstname: self.firstname,
 			lastname: self.lastname,
+			email: self.email,
+			phone_number: self.phone_number
 		}
 	end
 
