@@ -4,6 +4,7 @@ class RealEstate < ApplicationRecord
 	has_many :buildings
 	has_many :parkings
 	has_many :real_estate_pictures
+	has_many :plans
 
 	has_many :favorites
 	has_many :note_links
@@ -23,6 +24,7 @@ class RealEstate < ApplicationRecord
 			created_at: self.created_at,
 			title: self.title,
 			real_estate_pictures: self.real_estate_pictures.order(position: :asc).map(&:render_api),
+			plans: self.plans.order(position: :asc).map(&:render_api),
 			address: self.address,
 			zipcode: self.zipcode,
 			city: self.city,
@@ -53,6 +55,7 @@ class RealEstate < ApplicationRecord
 			created_at: self.created_at,
 			title: self.title,
 			real_estate_pictures: self.real_estate_pictures.order(position: :asc).map(&:render_api),
+			plans: self.plans.order(position: :asc).map(&:render_api),
 			address: self.address,
 			zipcode: self.zipcode,
 			city: self.city,
@@ -111,6 +114,9 @@ class RealEstate < ApplicationRecord
 	def destroy_pictures
 		self.real_estate_pictures.each do |real_estate_picture|
 			Cloudinary::Uploader.destroy(real_estate_picture.public_id)
+		end
+		self.plans.each do |plan|
+			Cloudinary::Uploader.destroy(plan.public_id)
 		end
 	end
 

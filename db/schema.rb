@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200901083842) do
+ActiveRecord::Schema.define(version: 20200921101705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,18 @@ ActiveRecord::Schema.define(version: 20200901083842) do
     t.integer "price"
     t.integer "sell_method"
     t.index ["real_estate_id"], name: "index_parkings_on_real_estate_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string "public_id"
+    t.string "url"
+    t.integer "position"
+    t.string "title"
+    t.integer "angle", default: 0
+    t.bigint "real_estate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["real_estate_id"], name: "index_plans_on_real_estate_id"
   end
 
   create_table "real_estate_actor_links", force: :cascade do |t|
@@ -376,6 +388,7 @@ ActiveRecord::Schema.define(version: 20200901083842) do
   add_foreign_key "notes", "agents"
   add_foreign_key "notes", "note_links", column: "note_links_id"
   add_foreign_key "parkings", "real_estates"
+  add_foreign_key "plans", "real_estates"
   add_foreign_key "real_estate_actor_links", "real_estate_actors"
   add_foreign_key "real_estate_actor_links", "real_estates"
   add_foreign_key "real_estate_actor_links", "users"
