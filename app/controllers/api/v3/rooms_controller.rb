@@ -50,6 +50,7 @@ class Api::V3::RoomsController < Api::V3::BaseController
 			:divisible,
 			:terrace,
 			:fill,
+			:number,
 			:lot_id,
 			:floor_id
 		)
