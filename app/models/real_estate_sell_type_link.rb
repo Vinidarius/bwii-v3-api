@@ -24,6 +24,7 @@ class RealEstateSellTypeLink < ApplicationRecord
 		{
 			id: self.id,
 			real_estate_id: self.real_estate_id,
+			real_estate_sell_type_id: self.real_estate_sell_type_id,
 			need_id: self.need_id
 		}
 	end
