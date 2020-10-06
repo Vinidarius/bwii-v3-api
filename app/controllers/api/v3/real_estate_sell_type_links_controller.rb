@@ -14,6 +14,7 @@ class Api::V3::RealEstateSellTypeLinksController < Api::V3::BaseController
 	def create
 		if RealEstateSellTypeLink.exists?(:real_estate_id => params[:real_estate_id])
 			params[:id] = RealEstateSellTypeLink.find_by(real_estate_id: params[:real_estate_id]).id
+			puts params[:id]
 			self.update();
 		else
 			@real_estate_sell_type_link = RealEstateSellTypeLink.new(permitted_params)
