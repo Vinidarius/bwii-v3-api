@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200926143900) do
+ActiveRecord::Schema.define(version: 20201006084512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,6 +210,9 @@ ActiveRecord::Schema.define(version: 20200926143900) do
     t.datetime "updated_at", null: false
     t.bigint "real_estate_sell_type_id"
     t.bigint "need_id"
+    t.integer "price"
+    t.integer "honoraire"
+    t.integer "global_price"
     t.index ["need_id"], name: "index_real_estate_sell_type_links_on_need_id"
     t.index ["real_estate_id"], name: "index_real_estate_sell_type_links_on_real_estate_id"
     t.index ["real_estate_sell_type_id"], name: "index_real_estate_sell_type_links_on_real_estate_sell_type_id"

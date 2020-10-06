@@ -23,6 +23,9 @@ class RealEstateSellTypeLink < ApplicationRecord
 	def render_id_api
 		{
 			id: self.id,
+			price: self.price,
+			honoraire: self.honoraire,
+			global_price: self.global_price,
 			real_estate_id: self.real_estate_id,
 			real_estate_sell_type_id: self.real_estate_sell_type_id,
 			need_id: self.need_id
