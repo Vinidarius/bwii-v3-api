@@ -12,13 +12,18 @@ class Api::V3::RealEstateSellTypeLinksController < Api::V3::BaseController
 	end
 
 	def create
-		@real_estate_sell_type_link = RealEstateSellTypeLink.new(permitted_params)
-		return render :json => [] unless @real_estate_sell_type_link.save
-		render(
-			json: @real_estate_sell_type_link.render_api,
-			status: 201,
-			location: api_v3_real_estate_sell_type_link_path(@real_estate_sell_type_link.id)
-		)
+		if RealEstateSellTypeLink.exists?(real_estate_id: params[:real_estate_id])
+			params[:id] = RealEstateSellTypeLink.find_by(real_estate_id: params[:real_estate_id]).id
+			self.update();
+		else
+			@real_estate_sell_type_link = RealEstateSellTypeLink.new(permitted_params)
+			return render :json => [] unless @real_estate_sell_type_link.save
+			render(
+				json: @real_estate_sell_type_link.render_api,
+				status: 201,
+				location: api_v3_real_estate_sell_type_link_path(@real_estate_sell_type_link.id)
+			)
+		end
 	end
 
 	def update
