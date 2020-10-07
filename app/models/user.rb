@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 			archived: self.archived,
 			compagny_id: self.compagny_id,
 			need_links: self.need_links.map(&:render_user_api),
-			favorites: self.favorites.map(&:render_user_api),
+			# favorites: self.favorites.map(&:render_user_api),
 		}
 	end
 
