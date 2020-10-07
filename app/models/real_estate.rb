@@ -6,14 +6,14 @@ class RealEstate < ApplicationRecord
 	has_many :real_estate_pictures
 	has_many :plans
 
-	has_many :favorites
-	has_many :note_links
-	has_many :visits
+	# has_many :favorites
+	# has_many :visits
 
 	has_many :real_estate_type_links
 	has_many :real_estate_actor_links
 	has_many :real_estate_sell_type_links
-	has_many :sector_links
+	# has_many :sector_links
+	has_many :note_links
 	has_many :need_links
 
 	before_destroy :destroy_associations
@@ -100,14 +100,14 @@ class RealEstate < ApplicationRecord
 		self.buildings.destroy_all
 		self.parkings.destroy_all
 
-		self.favorites.destroy_all
-		self.notes.destroy_all
-		self.visits.destroy_all
+		# self.favorites.destroy_all
+		self.note_links.destroy_all
+		# self.visits.destroy_all
 
 		self.real_estate_type_links.destroy_all
 		self.real_estate_actor_links.destroy_all
 		self.real_estate_sell_type_links.destroy_all
-		self.sector_links.destroy_all
+		# self.sector_links.destroy_all
 		self.need_links.destroy_all
 	end
 

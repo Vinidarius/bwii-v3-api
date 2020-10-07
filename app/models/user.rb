@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
 	belongs_to :compagny
 	has_many :user_type_links
 
-	has_many :favorites
-	has_many :visits
+	# has_many :favorites
+	# has_many :visits
 	has_many :real_estate_actor_links
 	has_many :note_links
 	has_many :need_links
@@ -110,10 +110,10 @@ class User < ActiveRecord::Base
 
 	def destroy_associations
 		self.user_type_links.destroy_all
-		self.favorites.destroy_all
-		self.needs.destroy_all
-		self.notes.destroy_all
-		self.visits.destroy_all
+		# self.favorites.destroy_all
+		self.need_links.destroy_all
+		self.note_links.destroy_all
+		# self.visits.destroy_all
 		self.real_estate_actor_links.destroy_all
 	end
 
