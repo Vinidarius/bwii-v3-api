@@ -53,7 +53,7 @@ class Api::V3::PlansController < Api::V3::BaseController
 		params.require(:plan).permit(
 			:public_id,
 			:url,
-			:name,
+			:title,
 			:position,
 			:angle,
 			:real_estate_id
