@@ -118,6 +118,8 @@ class RealEstate < ApplicationRecord
 		self.plans.each do |plan|
 			Cloudinary::Uploader.destroy(plan.public_id)
 		end
+		self.real_estate_pictures.destroy_all
+		self.plans.destroy_all
 	end
 
 end
