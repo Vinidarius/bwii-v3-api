@@ -36,7 +36,8 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 			@users = @users.where("firstname ILIKE '%#{params[:name]}%'").or(
 								@users.where("lastname ILIKE '%#{params[:name]}%'")).or(
 								@users.where("concat(firstname, ' ', lastname) ILIKE '%#{params[:name]}%'")).or(
-								@users.where("concat(lastname, ' ', firstname) ILIKE '%#{params[:name]}%'"))
+								@users.where("concat(lastname, ' ', firstname) ILIKE '%#{params[:name]}%'")).or(
+								@users.where("company ILIKE '%#{params[:name]}%'"))
 		end
 
 		if params[:categories] && params[:categories].to_i != 0
