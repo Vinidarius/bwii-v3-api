@@ -56,7 +56,9 @@ class Api::V3::NeedLinksController < Api::V3::BaseController
 		params.require(:need_link).permit(
 			:user_id,
 			:real_estate_id,
-			:need_id
+			:need_id,
+			:agent_choice,
+			:message,
 		)
 	end
 

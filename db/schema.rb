@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201013070949) do
+ActiveRecord::Schema.define(version: 20201013090617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20201013070949) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.boolean "agent_choice", default: false
+    t.string "body"
     t.index ["need_id"], name: "index_need_links_on_need_id"
     t.index ["real_estate_id"], name: "index_need_links_on_real_estate_id"
     t.index ["user_id"], name: "index_need_links_on_user_id"
