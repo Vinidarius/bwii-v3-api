@@ -8,7 +8,7 @@ class NeedLink < ApplicationRecord
 		{
 			id: self.id,
 			real_estate_id: self.real_estate_id ? RealEstate.find_by(id: self.real_estate_id).render_list_api : nil,
-			message: self.message,
+			body: self.body,
 			agent_choice: self.agent_choice,
 		}
 	end
@@ -18,7 +18,7 @@ class NeedLink < ApplicationRecord
 			id: self.id,
 			created_at: self.created_at,
 			real_estate_id: self.real_estate_id ? RealEstate.find_by(id: self.real_estate_id).render_list_api : nil,
-			message: self.message,
+			body: self.body,
 			agent_choice: self.agent_choice,
 		}
 	end
@@ -29,7 +29,7 @@ class NeedLink < ApplicationRecord
 			real_estate_id: self.real_estate_id,
 			need_id: self.need_id,
 			user_id: self.user_id,
-			message: self.message,
+			body: self.body,
 			agent_choice: self.agent_choice,
 		}
 	end
@@ -38,7 +38,7 @@ class NeedLink < ApplicationRecord
 		{
 			id: self.id,
 			real_estate_id: self.real_estate_id ? RealEstate.find_by(id: self.real_estate_id).render_list_api : nil,
-			message: self.message,
+			body: self.body,
 			agent_choice: self.agent_choice,
 		}
 	end

@@ -58,7 +58,7 @@ class Api::V3::NeedLinksController < Api::V3::BaseController
 			:real_estate_id,
 			:need_id,
 			:agent_choice,
-			:message,
+			:body,
 		)
 	end
 
