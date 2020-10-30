@@ -13,6 +13,7 @@ class Sector < ApplicationRecord
 			name: self.name,
 			text_color: self.text_color,
 			background_color: self.background_color,
+			region_id: self.region_id,
 			compagny_id: self.compagny_id
 		}
 	end

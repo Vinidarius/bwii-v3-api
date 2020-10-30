@@ -45,7 +45,10 @@ class Api::V3::SectorsController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:sector).permit(
-			:name
+			:name,
+			:text_color,
+			:background_color,
+			:region_id,
 		)
 	end
 
