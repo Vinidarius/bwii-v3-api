@@ -45,8 +45,7 @@ class Api::V3::SectorsController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:sector).permit(
-			:places_number,
-			:real_estate_id,
+			:name
 		)
 	end
 

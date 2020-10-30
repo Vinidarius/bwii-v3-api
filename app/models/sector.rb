@@ -1,6 +1,7 @@
 class Sector < ApplicationRecord
 
 	belongs_to :compagny
+	belongs_to :region
 
 	has_many :sector_links
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201013090617) do
+ActiveRecord::Schema.define(version: 20201030104517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,6 +275,13 @@ ActiveRecord::Schema.define(version: 20201013090617) do
     t.index ["compagny_id"], name: "index_real_estates_on_compagny_id"
   end
 
+  create_table "regions", force: :cascade do |t|
+    t.string "name"
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.decimal "area", precision: 10, scale: 2, default: "0.0"
     t.decimal "divisible", precision: 10, scale: 2
@@ -306,7 +313,9 @@ ActiveRecord::Schema.define(version: 20201013090617) do
     t.bigint "compagny_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "region_id"
     t.index ["compagny_id"], name: "index_sectors_on_compagny_id"
+    t.index ["region_id"], name: "index_sectors_on_region_id"
   end
 
   create_table "user_type_links", force: :cascade do |t|
@@ -415,6 +424,7 @@ ActiveRecord::Schema.define(version: 20201013090617) do
   add_foreign_key "sector_links", "real_estates"
   add_foreign_key "sector_links", "sectors"
   add_foreign_key "sectors", "compagnies"
+  add_foreign_key "sectors", "regions"
   add_foreign_key "user_type_links", "user_types"
   add_foreign_key "user_type_links", "users"
   add_foreign_key "user_types", "compagnies"

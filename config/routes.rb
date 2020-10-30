@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 			resources :note_links, only: [:index, :shown, :create, :update, :destroy]
 			resources :visits, only: [:index, :shown, :create, :update, :destroy]
 
-			resources :sectors, only: [:index, :shown, :create, :update, :destroy]
+			resources :regions, only: [:index, :shown, :create, :update, :destroy]
 
 			get '/compagnies_list', to: 'compagnies#list'
 
