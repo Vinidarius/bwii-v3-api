@@ -13,4 +13,13 @@ class SectorLink < ApplicationRecord
 		}
 	end
 
+	def render_id_api
+		{
+			id: self.id,
+			real_estate_id: self.real_estate_id,
+			need_id: self.need_id,
+			sector_id: self.sector_id
+		}
+	end
+
 end
