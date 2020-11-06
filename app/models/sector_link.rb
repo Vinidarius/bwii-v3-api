@@ -22,7 +22,7 @@ class SectorLink < ApplicationRecord
 		}
 	end
 
-	def render_id_api
+	def render_details_api
 		{
 			id: self.id,
 			sector_id: Sector.find_by(id: self.sector_id).render_api
