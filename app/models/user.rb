@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 	has_many :real_estate_actor_links
 	has_many :note_links
 	has_many :need_links
+	has_many :needs, through: :need_links
+	has_many :real_estate_type_links, through: :needs
 
 	before_destroy :destroy_associations
 

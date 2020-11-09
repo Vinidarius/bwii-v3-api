@@ -69,6 +69,36 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 			@users = @users.order("lower(lastname) DESC")
 		end
 
+
+
+		unless params[:area].blank?
+			@users = @users.joins(:needs).where("needs.area_min <= :area AND needs.area_max >= :area", {area: params[:area].to_i})
+			# @users = @users.joins(:real_estate_type_links).where(real_estate_type_links: {real_estate_type_id: 3})
+		end
+
+		# unless params[:city].blank?
+		# 	@users = @users.joins(:needs).where("lower(needs.city) = :city", {city: params[:city]})
+		# end
+
+		if params[:real_estate_categories] && params[:real_estate_categories].to_i != 0
+			@real_estate_types = RealEstateType.all
+			@real_estate_types = @real_estate_types.reverse
+			@value = params[:real_estate_categories].to_i
+			@valid_users = []
+
+			@real_estate_types.each_with_index do |el, index|
+				puts "value: " + @value.to_s
+				puts 2 ** (@real_estate_types.length - 1 - index)
+				if @value >= 2 ** (@real_estate_types.length - 1 - index)
+					@value -= 2 ** (@real_estate_types.length - 1 - index)
+					puts "element: " + el.name
+					@valid_users = @users.joins(:real_estate_type_links).where(real_estate_type_links: {real_estate_type_id: el.id}).pluck(:id)
+					@users = @users.where(id: @valid_users)
+				end
+			end
+		end
+
+
 		if params[:page] && params[:nbr]
 			return self.with_associations(@users.page(params[:page]).per(params[:nbr]))
 		end
