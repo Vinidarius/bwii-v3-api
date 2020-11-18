@@ -72,8 +72,7 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 
 
 		unless params[:area].blank?
-			@users = @users.joins(:needs).where("needs.area_min <= :area AND needs.area_max >= :area", {area: params[:area].to_i})
-			@users.uniq
+			@users = @users.joins(:needs).where("needs.area_min <= :area AND needs.area_max >= :area", {area: params[:area].to_i}).uniq
 		end
 
 		if params[:real_estate_categories] && params[:real_estate_categories].to_i != 0
