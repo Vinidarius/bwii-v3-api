@@ -79,7 +79,6 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 
 		if params[:real_estate_categories] && params[:real_estate_categories].to_i != 0
 			@real_estate_types = RealEstateType.all
-			@real_estate_types = @real_estate_types.reverse
 			@value = params[:real_estate_categories].to_i
 			@valid_users = []
 
