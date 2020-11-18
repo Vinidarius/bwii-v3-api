@@ -73,7 +73,6 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 
 		unless params[:area].blank?
 			@users = @users.joins(:needs).where("needs.area_min <= :area AND needs.area_max >= :area", {area: params[:area].to_i})
-			# @users = @users.joins(:real_estate_type_links).where(real_estate_type_links: {real_estate_type_id: 3})
 		end
 
 		# unless params[:city].blank?
