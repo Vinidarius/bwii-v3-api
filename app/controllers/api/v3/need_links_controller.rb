@@ -21,12 +21,16 @@ class Api::V3::NeedLinksController < Api::V3::BaseController
 	end
 
 	def create
-		@hasValidNeeds = Api::V3::NeedLinksFilter.new(NeedLink.where(user_id: params[:user_id]), params).need_links
-		if @hasValidNeeds.length == 0
-			@need_link = NeedLink.new({user_id: params[:user_id], real_estate_id: params[:real_estate_id], need_id: nil, agent_choice: true, body: params[:body]})
+		if (params[:need_id])
+			@need_link = NeedLink.new(permitted_params)
 		else
-			@hasValidNeeds.each do |valid_need|
-				@need_link = NeedLink.new({user_id: params[:user_id], real_estate_id: params[:real_estate_id], need_id: valid_need, agent_choice: false, body: params[:body]})
+			@hasValidNeeds = Api::V3::NeedLinksFilter.new(NeedLink.where(user_id: params[:user_id]), params).need_links
+			if @hasValidNeeds.length == 0
+				@need_link = NeedLink.new({user_id: params[:user_id], real_estate_id: params[:real_estate_id], need_id: nil, agent_choice: true, body: params[:body]})
+			else
+				@hasValidNeeds.each do |valid_need|
+					@need_link = NeedLink.new({user_id: params[:user_id], real_estate_id: params[:real_estate_id], need_id: valid_need, agent_choice: false, body: params[:body]})
+				end
 			end
 		end
 		return render :json => [] unless @need_link.save
