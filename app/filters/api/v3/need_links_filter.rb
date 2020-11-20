@@ -14,8 +14,6 @@ class Api::V3::NeedLinksFilter < Api::V3::BaseFilter
 
 	def need_links
 
-		@response = false;
-
 		@needs = Need.where(id: self.resource.pluck(:need_id))
 		@real_estate = RealEstate.find_by(id: params[:real_estate_id])
 
@@ -27,7 +25,11 @@ class Api::V3::NeedLinksFilter < Api::V3::BaseFilter
 			@needs = @needs.where(id: @valid_needs)
 		end
 
-		# @needs = @needs.where(area_max: 0)
+		@valid_need = [];
+		@real_estate.sector_links.each do |real_estate_sector|
+			@valid_needs = @needs.joins(:sector_links).where(sector_links: {sector_id: real_estate_sector.sector_id}).pluck(:id)
+			@needs = @needs.where(id: @valid_needs)
+		end
 
 		return self.with_associations(@needs.ids)
 

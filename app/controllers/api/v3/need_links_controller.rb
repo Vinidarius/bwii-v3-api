@@ -20,21 +20,15 @@ class Api::V3::NeedLinksController < Api::V3::BaseController
 		)
 	end
 
-	def test
+	def create
 		@hasValidNeeds = Api::V3::NeedLinksFilter.new(NeedLink.where(user_id: params[:user_id]), params).need_links
 		if @hasValidNeeds.length == 0
-			@agent_choice = NeedLink.new({user_id: params[:user_id], real_estate_id: params[:real_estate_id], need_id: nil, agent_choice: true, body: params[:body]})
-			@agent_choice.save
+			@need_link = NeedLink.new({user_id: params[:user_id], real_estate_id: params[:real_estate_id], need_id: nil, agent_choice: true, body: params[:body]})
 		else
 			@hasValidNeeds.each do |valid_need|
-				@need = NeedLink.new({user_id: params[:user_id], real_estate_id: params[:real_estate_id], need_id: valid_need, agent_choice: false, body: params[:body]})
-				@need.save
+				@need_link = NeedLink.new({user_id: params[:user_id], real_estate_id: params[:real_estate_id], need_id: valid_need, agent_choice: false, body: params[:body]})
 			end
 		end
-	end
-
-	def create
-		@need_link = NeedLink.new(permitted_params)
 		return render :json => [] unless @need_link.save
 		render(
 			json: @need_link.render_api,
