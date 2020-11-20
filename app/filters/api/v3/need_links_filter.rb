@@ -22,13 +22,13 @@ class Api::V3::NeedLinksFilter < Api::V3::BaseFilter
 
 			@valid_needs = [];
 			@real_estate.real_estate_type_links.each do |real_estate_type|
-				@valid_needs = @needs.joins(:real_estate_type_links).where(real_estate_type_links: {real_estate_type_id: real_estate_type.real_estate_type_id}).pluck(:id)
+				@valid_needs = @needs.joins(:real_estate_type_links).where(real_estate_type_links: {real_estate_type_id: real_estate_type.real_estate_type_id}).uniq.pluck(:id)
 				puts @valid_needs
 				@needs = @needs.where(id: @valid_needs)
 			end
 
 			@real_estate.sector_links.each do |real_estate_sector|
-				@valid_needs = @needs.joins(:sector_links).where(sector_links: {sector_id: real_estate_sector.sector_id}).pluck(:id)
+				@valid_needs = @needs.joins(:sector_links).where(sector_links: {sector_id: real_estate_sector.sector_id}).uniq.pluck(:id)
 				puts @valid_needs
 				@needs = @needs.where(id: @valid_needs)
 			end
