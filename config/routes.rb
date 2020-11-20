@@ -59,6 +59,8 @@ Rails.application.routes.draw do
 			get '/need_link_delete', to: 'need_links#destroy'
 			delete '/user_needs', to: 'need_links#delete_user'
 
+			post '/test_need_link', to: 'need_links#test'
+
 		end
 	end
 
