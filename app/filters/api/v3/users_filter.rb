@@ -96,7 +96,7 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 			@users = @users.where(id: @valid_users)
 		end
 
-		if params[:sectors]
+		if params[:sectors] && params[:sectors].size > 2
 			@valid_users = []
 
 			JSON.parse(params[:sectors]).each do |sector|

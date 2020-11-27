@@ -43,7 +43,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			end
 		end
 
-		if params[:sectors]
+		if params[:sectors] && params[:sectors].size > 2
 			@valid_real_estates = [];
 
 			JSON.parse(params[:sectors]).each do |sector|
