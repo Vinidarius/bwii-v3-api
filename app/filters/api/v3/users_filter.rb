@@ -1,3 +1,5 @@
+require 'json'
+
 class Api::V3::UsersFilter < Api::V3::BaseFilter
 
   def collection
@@ -83,17 +85,25 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 			@valid_users = []
 
 			@real_estate_types.each_with_index do |el, index|
-				puts "value: " + @value.to_s
-				puts 2 ** (@real_estate_types.length - 1 - index)
+				# puts "value: " + @value.to_s
+				# puts 2 ** (@real_estate_types.length - 1 - index)
 				if @value >= 2 ** (@real_estate_types.length - 1 - index)
 					@value -= 2 ** (@real_estate_types.length - 1 - index)
-					puts "element: " + el.name
-					@valid_users = @users.joins(:real_estate_type_links).where(real_estate_type_links: {real_estate_type_id: el.id}).pluck(:id)
-					@users = @users.where(id: @valid_users)
+					# puts "element: " + el.name
+					@valid_users = @users.joins(:real_estate_type_links).where(real_estate_type_links: {real_estate_type_id: el.id}).pluck(:id).concat(@valid_users)
 				end
 			end
+			@users = @users.where(id: @valid_users)
 		end
 
+		if params[:sectors]
+			@valid_users = []
+
+			JSON.parse(params[:sectors]).each do |sector|
+				@valid_users = @users.joins(:sector_links).where(sector_links: {sector_id: sector}).pluck(:id).concat(@valid_users)
+			end
+			@users = @users.where(id: @valid_users)
+		end
 
 		if params[:page] && params[:nbr]
 			return self.with_associations(@users.page(params[:page]).per(params[:nbr]))

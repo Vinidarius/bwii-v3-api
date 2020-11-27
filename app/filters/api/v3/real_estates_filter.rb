@@ -43,6 +43,15 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			end
 		end
 
+		if params[:sectors]
+			@valid_real_estates = [];
+
+			JSON.parse(params[:sectors]).each do |sector|
+				@valid_real_estates = @real_estates.joins(:sector_links).where(sector_links: {sector_id: sector}).pluck(:id).concat(@valid_real_estates)
+			end
+			@real_estates = @real_estates.where(id: @valid_real_estates)
+		end
+
 		if params[:minSize].to_i.zero? || params[:maxSize].to_i.zero?
 			@real_estates = @real_estates.where(area: ("0".to_i)..("100000".to_i))
 		else
