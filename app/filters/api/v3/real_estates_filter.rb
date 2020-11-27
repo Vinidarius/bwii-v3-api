@@ -43,7 +43,9 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			end
 		end
 
-		unless params[:minSize].blank? && params[:maxSize].blank?
+		if params[:minSize].to_i.zero? || params[:maxSize].to_i.zero?
+			@real_estates = @real_estates.where(area: ("0".to_i)..("100000".to_i))
+		else
 			@real_estates = @real_estates.where(area: (params[:minSize].to_i)..(params[:maxSize].to_i))
 		end
 
