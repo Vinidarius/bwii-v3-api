@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 	namespace :api do
 		namespace :v3 do
 
-			mount_devise_token_auth_for 'Compagny', at: 'auth_compagnies'
-			mount_devise_token_auth_for 'Agent', at: 'auth_agents'
-			mount_devise_token_auth_for 'User', at: 'auth_users'
+			# mount_devise_token_auth_for 'Compagny', at: 'auth_compagnies'
+			# mount_devise_token_auth_for 'Agent', at: 'auth_agents'
+			# mount_devise_token_auth_for 'User', at: 'auth_users'
 
 			resources :compagnies, only: [:index, :show, :create, :update, :destroy]
 			resources :agents, only: [:index, :show, :create, :update, :destroy]
