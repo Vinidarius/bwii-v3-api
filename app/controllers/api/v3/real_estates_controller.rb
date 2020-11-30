@@ -22,6 +22,12 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 		render :json => @real_estate.render_details_api
 	end
 
+	def all
+		@real_estate = RealEstate.all
+		return render :json => [] unless !@real_estate.blank?
+		render :json => @real_estate.render_details_api
+	end
+
 	def create
 		@real_estate = RealEstate.new(permitted_params)
 		return render :json => [] unless @real_estate.save
