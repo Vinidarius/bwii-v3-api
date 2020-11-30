@@ -24,6 +24,7 @@ gem 'kaminari'
 
 # gem for upload
 gem 'cloudinary'
+gem "figaro"
 
 # gem for authentication
 gem 'devise'

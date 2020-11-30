@@ -1,19 +1,19 @@
 ---
 development:
   cloud_name: dtxxp1unl
-  api_key: ENV["CLOUD_API_KEY"]
-  api_secret: ENV["CLOUD_SECRET"]
+  api_key: '897141848264854'
+  api_secret: 0-tWGyrKBJxOAYODfs75y6xhJWI
   enhance_image_tag: true
   static_file_support: false
 production:
-  cloud_name: "dtxxp1unl"
-  api_key: ENV["CLOUD_API_KEY"]
-  api_secret: ENV["CLOUD_SECRET"]
+  cloud_name: dtxxp1unl
+  api_key: '897141848264854'
+  api_secret: 0-tWGyrKBJxOAYODfs75y6xhJWI
   enhance_image_tag: true
   static_file_support: true
 test:
   cloud_name: dtxxp1unl
-  api_key: ENV["CLOUD_API_KEY"]
-  api_secret: ENV["CLOUD_SECRET"]
+  api_key: '897141848264854'
+  api_secret: 0-tWGyrKBJxOAYODfs75y6xhJWI
   enhance_image_tag: true
   static_file_support: false
