@@ -57,6 +57,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:real_estate).permit(
+			:old_id,
 			:title,
 			:address,
 			:city,

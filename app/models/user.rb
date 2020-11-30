@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
 	def render_api
 		{
 			id: self.id,
+			old_id: self.old_id,
 			created_at: self.created_at,
 			firstname: self.firstname,
 			lastname: self.lastname,
@@ -96,6 +97,7 @@ class User < ActiveRecord::Base
 	def render_details_api
 		{
 			id: self.id,
+			old_id: self.old_id,
 			created_at: self.created_at,
 			firstname: self.firstname,
 			lastname: self.lastname,

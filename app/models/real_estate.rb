@@ -21,6 +21,7 @@ class RealEstate < ApplicationRecord
 	def render_api
 		{
 			id: self.id,
+			old_id: self.old_id,
 			created_at: self.created_at,
 			title: self.title,
 			real_estate_pictures: self.real_estate_pictures.order(position: :asc).map(&:render_api),
@@ -53,6 +54,7 @@ class RealEstate < ApplicationRecord
 	def render_details_api
 		{
 			id: self.id,
+			old_id: self.old_id,
 			created_at: self.created_at,
 			title: self.title,
 			real_estate_pictures: self.real_estate_pictures.order(position: :asc).map(&:render_api),

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201030104517) do
+ActiveRecord::Schema.define(version: 20201130140212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,6 +272,7 @@ ActiveRecord::Schema.define(version: 20201030104517) do
     t.bigint "compagny_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "old_id"
     t.index ["compagny_id"], name: "index_real_estates_on_compagny_id"
   end
 
@@ -367,6 +368,7 @@ ActiveRecord::Schema.define(version: 20201030104517) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.integer "old_id"
     t.index ["compagny_id"], name: "index_users_on_compagny_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

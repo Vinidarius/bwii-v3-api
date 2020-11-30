@@ -63,6 +63,7 @@ class Api::V3::UsersController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:user).permit(
+			:old_id,
 			:email,
 			:firstname,
 			:lastname,
