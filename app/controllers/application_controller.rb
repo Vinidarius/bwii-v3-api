@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
 			])
 		elsif @routing == "/auth_users"
 			devise_parameter_sanitizer.permit(:sign_up, keys: [
-				:old_id,
 				:firstname,
 				:lastname,
 				:email,
