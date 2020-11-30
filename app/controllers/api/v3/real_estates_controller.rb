@@ -24,8 +24,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 
 	def all
 		@real_estate = RealEstate.all
-		return render :json => [] unless !@real_estate.blank?
-		render :json => @real_estate.render_details_api
+		render :json => array_serializer(@real_estates, "classic")
 	end
 
 	def create
