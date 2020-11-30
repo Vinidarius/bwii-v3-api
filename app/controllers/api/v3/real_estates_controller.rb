@@ -23,7 +23,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 	end
 
 	def all
-		@real_estate = RealEstate.all
+		@real_estates = RealEstate.all
 		render :json => array_serializer(@real_estates, "classic")
 	end
 
