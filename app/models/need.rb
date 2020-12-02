@@ -10,6 +10,7 @@ class Need < ApplicationRecord
 	def render_api
 		{
 			id: self.id,
+			old_id: self.old_id,
 			name: self.name,
 			area_min: self.area_min,
 			area_max: self.area_max,
@@ -24,6 +25,7 @@ class Need < ApplicationRecord
 	def render_list_api
 		{
 			id: self.id,
+			old_id: self.old_id,
 			name: self.name,
 			area_min: self.area_min,
 			area_max: self.area_max,

@@ -48,8 +48,7 @@ class Api::V3::NotesController < Api::V3::BaseController
 			:title,
 			:date,
 			:body,
-			:agent_id,
-			:note_link_id
+			:agent_id
 		)
 	end
 

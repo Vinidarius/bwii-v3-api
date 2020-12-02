@@ -51,6 +51,7 @@ class Api::V3::NeedsController < Api::V3::BaseController
 	def permitted_params
 		params.require(:need).permit(
 			:name,
+			:old_id,
 			:area_min,
 			:area_max,
 			:city,
