@@ -6,7 +6,6 @@ class RealEstate < ApplicationRecord
 	has_many :real_estate_pictures
 	has_many :plans
 
-	# has_many :favorites
 	# has_many :visits
 
 	has_many :real_estate_type_links
@@ -47,7 +46,6 @@ class RealEstate < ApplicationRecord
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_id_api),
 			real_estate_actor_links: self.real_estate_actor_links.map(&:render_id_api),
 			sector_links: self.sector_links.map(&:render_id_api),
-			# favorites: self.favorites.map(&:render_real_estate_api),
 		}
 	end
 
@@ -80,8 +78,6 @@ class RealEstate < ApplicationRecord
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_details_api),
 			real_estate_actor_links: self.real_estate_actor_links.map(&:render_id_api),
 			sector_links: self.sector_links.map(&:render_details_api),
-			# favorites: self.favorites.map(&:render_real_estate_api),
-		}
 	end
 
 	def render_list_api
@@ -104,7 +100,6 @@ class RealEstate < ApplicationRecord
 		self.buildings.destroy_all
 		self.parkings.destroy_all
 
-		# self.favorites.destroy_all
 		self.note_links.destroy_all
 		# self.visits.destroy_all
 

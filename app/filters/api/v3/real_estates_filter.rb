@@ -17,7 +17,10 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 		end
 
 		if params[:title] && params[:title].length != 0
-			@real_estates = @real_estates.where("title ILIKE '%#{params[:title]}%'")
+			@valid_real_estates = [];
+
+			@valid_real_estates = @real_estates.where("title ILIKE '%#{params[:title]}%'").pluck(:id)
+			@real_estates = @real_estates.where(id: @valid_real_estates);
 		end
 
 		if params[:categories] && params[:categories].to_i != 0
@@ -67,6 +70,8 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 		if params[:page] && params[:nbr]
 			return self.with_associations(@real_estates.page(params[:page]).per(params[:nbr]))
 		end
+
+		# filter by sector, title, proprio, agents, promoteur
 
    return self.with_associations(@real_estates)
   end
