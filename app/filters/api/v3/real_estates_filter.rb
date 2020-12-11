@@ -48,10 +48,10 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			end
 		end
 
-		if params[:sectors] && params[:sectors].size > 2
+		if params[:sectors_list] && params[:sectors_list].size > 2
 			@valid_real_estates = [];
 
-			JSON.parse(params[:sectors]).each do |sector|
+			JSON.parse(params[:sectors_list]).each do |sector|
 				@valid_real_estates = @real_estates.joins(:sector_links).where(sector_links: {sector_id: sector}).pluck(:id).concat(@valid_real_estates)
 			end
 			@real_estates = @real_estates.where(id: @valid_real_estates)
