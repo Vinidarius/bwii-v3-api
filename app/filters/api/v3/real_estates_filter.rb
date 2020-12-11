@@ -19,7 +19,9 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 		if params[:title] && params[:title].length != 0
 			@valid_real_estates = []
 
-			@valid_real_estates = @real_estates.where("title ILIKE '%#{params[:title]}%'").pluck(:id)
+			# @valid_real_estates = @real_estates.where("title ILIKE '%#{params[:title]}%'").pluck(:id)
+			@valid_real_estates = @real_estates.joins(:sectors).where(sectors: {name: "name ILIKE '%#{params[:title]}%'"}).pluck(:id)
+
 			@real_estates = @real_estates.where(id: @valid_real_estates);
 		end
 

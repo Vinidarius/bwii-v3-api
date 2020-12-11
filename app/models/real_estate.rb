@@ -12,6 +12,7 @@ class RealEstate < ApplicationRecord
 	has_many :real_estate_actor_links
 	has_many :real_estate_sell_type_links
 	has_many :sector_links
+	has_many :sectors, through: :sector_links
 	has_many :note_links
 	has_many :need_links
 
