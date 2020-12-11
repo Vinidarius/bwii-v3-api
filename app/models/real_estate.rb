@@ -10,6 +10,8 @@ class RealEstate < ApplicationRecord
 
 	has_many :real_estate_type_links
 	has_many :real_estate_actor_links
+	has_many :users, through: :real_estate_actor_links, class_name: "User"
+	# has_many :real_estate_actors, through: :real_estate_actor_links, class_name: "RealEstateActor"
 	has_many :real_estate_sell_type_links
 	has_many :sector_links
 	has_many :sectors, through: :sector_links, class_name: "Sector"
