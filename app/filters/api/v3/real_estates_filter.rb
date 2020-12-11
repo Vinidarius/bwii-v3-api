@@ -20,9 +20,9 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@valid_real_estates = []
 
 			# @valid_real_estates = @real_estates.where("title ILIKE '%#{params[:title]}%'").pluck(:id)
-			@valid_real_estates = @real_estates.joins(:sectors).where(sectors: {name: "name ILIKE '%#{params[:title]}%'"}).pluck(:id)
+			# @valid_real_estates = @real_estates.joins(:sectors).where(sectors: {name: "name ILIKE '%#{params[:title]}%'"}).pluck(:id)
 
-			@real_estates = @real_estates.where(id: @valid_real_estates);
+			# @real_estates = @real_estates.where(id: @valid_real_estates);
 		end
 
 		if params[:categories] && params[:categories].to_i != 0
