@@ -78,6 +78,7 @@ class RealEstate < ApplicationRecord
 			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_details_api),
 			real_estate_actor_links: self.real_estate_actor_links.map(&:render_id_api),
 			sector_links: self.sector_links.map(&:render_details_api),
+		}
 	end
 
 	def render_list_api
