@@ -15,7 +15,7 @@ class Api::V3::VisitsFilter < Api::V3::BaseFilter
 			visits = visits.where('visits.user_id = ?', params[:user_id])
 		end
 
-   return self.with_associations(visits)
+   return self.with_associations(visits.order(date : :desc))
   end
 
 end

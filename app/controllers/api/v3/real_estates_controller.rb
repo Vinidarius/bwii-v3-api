@@ -42,6 +42,74 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 			return api_error(status: 422, errors: @new_real_estate_sell_type_link.errors) unless @new_real_estate_sell_type_link.save
 		end
 
+		RealEstateActorLink.where(real_estate_id: @old_real_estate.id).find_each do |old_real_estate_actor_link|
+			@new_real_estate_actor_link = RealEstateActorLink.new(old_real_estate_actor_link.attributes)
+			@new_real_estate_actor_link.id = nil
+			@new_real_estate_actor_link.real_estate_id = @new_real_estate.id
+			return api_error(status: 422, errors: @new_real_estate_actor_link.errors) unless @new_real_estate_actor_link.save
+		end
+
+		SectorLink.where(real_estate_id: @old_real_estate.id).find_each do |old_sector_link|
+			@new_sector_link = SectorLink.new(old_sector_link.attributes)
+			@new_sector_link.id = nil
+			@new_sector_link.real_estate_id = @new_real_estate.id
+			return api_error(status: 422, errors: @new_sector_link.errors) unless @new_sector_link.save
+		end
+
+		Building.where(real_estate_id: @old_real_estate.id).find_each do |old_building|
+			@new_building = Building.new(old_building.attributes)
+			@new_building.id = nil
+			@new_building.real_estate_id = @new_real_estate.id
+			return api_error(status: 422, errors: @new_building.errors) unless @new_building.save
+			Floor.where(building_id: old_building.id).find_each do |old_floor|
+				@new_floor = Floor.new(old_floor.attributes)
+				@new_floor.id = nil
+				@new_floor.building_id = @new_building.id
+				return api_error(status: 422, errors: @new_floor.errors) unless @new_floor.save
+				Room.where(floor_id: old_floor.id).find_each do |old_room|
+					@new_room = Room.new(old_room.attributes)
+					@new_room.id = nil
+					@new_room.floor_id = @new_floor.id
+					return api_error(status: 422, errors: @new_room.errors) unless @new_room.save
+					RealEstateTypeLink.where(room_id: old_room.id).find_each do |old_real_estate_type_link|
+						@new_real_estate_type_link = RealEstateTypeLink.new(old_real_estate_type_link.attributes)
+						@new_real_estate_type_link.id = nil
+						@new_real_estate_type_link.room_id = @new_room.id
+						return api_error(status: 422, errors: @new_real_estate_type_link.errors) unless @new_real_estate_type_link.save
+					end
+				end
+			end
+		end
+
+		Parking.where(real_estate_id: @old_real_estate.id).find_each do |old_parking|
+			@new_parking = Parking.new(old_parking.attributes)
+			@new_parking.id = nil
+			@new_parking.real_estate_id = @new_real_estate.id
+			return api_error(status: 422, errors: @new_parking.errors) unless @new_parking.save
+		end
+
+		RealEstatePicture.where(real_estate_id: @old_real_estate.id).find_each do |old_real_estate_picture|
+			@request = Cloudinary::Uploader.upload(params[:base])
+			@new_real_estate_picture = RealEstatePicture.new(old_real_estate_picture.attributes)
+			@new_real_estate_picture.id = nil
+			@new_real_estate_picture.real_estate_id = @new_real_estate.id
+			@new_real_estate_picture.public_id = @request["public_id"]
+			@new_real_estate_picture.url = @request["secure_url"]
+			@new_real_estate_picture.url = @new_real_estate_picture.url[0, @new_real_estate_picture.url.index('upload') + "upload".size] + "/a_" + params[:angle].to_s + @new_real_estate_picture.url[(@new_real_estate_picture.url.index('upload') + "upload".size)..@new_real_estate_picture.url.size]
+			return api_error(status: 422, errors: @new_real_estate_picture.errors) unless @new_real_estate_picture.save
+		end
+
+		Plan.where(real_estate_id: @old_real_estate.id).find_each do |old_plan|
+			@request = Cloudinary::Uploader.upload(params[:base])
+			@new_plan = RealEstatePicture.new(old_real_estate_picture.attributes)
+			@new_plan.id = nil
+			@new_plan.real_estate_id = @new_real_estate.id
+			@new_plan.public_id = @request["public_id"]
+			@new_plan.url = @request["secure_url"]
+			@new_plan.url = @new_plan.url[0, @new_plan.url.index('upload') + "upload".size] + "/a_" + params[:angle].to_s + @new_plan.url[(@new_plan.url.index('upload') + "upload".size)..@new_plan.url.size]
+			return api_error(status: 422, errors: @new_plan.errors) unless @new_plan.save
+		end
+
 		render(
 			json: @new_real_estate.render_api,
 			status: 201,

@@ -59,6 +59,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 		end
 
 		if params[:minSize].to_i.zero? || params[:maxSize].to_i.zero?
+			# prendre en compte le divisible
 			@real_estates = @real_estates.where(area: ("0".to_i)..("100000".to_i))
 		else
 			@real_estates = @real_estates.where(area: (params[:minSize].to_i)..(params[:maxSize].to_i))

@@ -12,13 +12,18 @@ class Api::V3::VisitsController < Api::V3::BaseController
 	end
 
 	def create
-		@visit = Visit.new(permitted_params)
-		return render :json => [] unless @visit.save
-		render(
-			json: @visit.render_api,
-			status: 201,
-			location: api_v3_visit_path(@visit.id)
-		)
+		if Visit.exists?(:real_estate_id => params[:real_estate_id], :agent_id => params[:agent_id], :kind => params[:kind])
+			params[:id] = Visit.find_by(real_estate_id: params[:real_estate_id], agent_id: params[:agent_id], kind: params[:kind]).id
+			self.update();
+		else
+			@visit = Visit.new(permitted_params)
+			return render :json => [] unless @visit.save
+			render(
+				json: @visit.render_api,
+				status: 201,
+				location: api_v3_visit_path(@visit.id)
+			)
+		end
 	end
 
 	def update
