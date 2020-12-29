@@ -89,7 +89,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 		end
 
 		RealEstatePicture.where(real_estate_id: @old_real_estate.id).find_each do |old_real_estate_picture|
-			@request = Cloudinary::Uploader.upload(params[:base])
+			@request = Cloudinary::Uploader.upload(old_real_estate_picture.url)
 			@new_real_estate_picture = RealEstatePicture.new(old_real_estate_picture.attributes)
 			@new_real_estate_picture.id = nil
 			@new_real_estate_picture.real_estate_id = @new_real_estate.id
@@ -100,7 +100,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 		end
 
 		Plan.where(real_estate_id: @old_real_estate.id).find_each do |old_plan|
-			@request = Cloudinary::Uploader.upload(params[:base])
+			@request = Cloudinary::Uploader.upload(old_plan.url)
 			@new_plan = RealEstatePicture.new(old_real_estate_picture.attributes)
 			@new_plan.id = nil
 			@new_plan.real_estate_id = @new_real_estate.id
