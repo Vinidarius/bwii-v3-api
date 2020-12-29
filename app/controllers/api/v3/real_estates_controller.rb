@@ -101,7 +101,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 
 		Plan.where(real_estate_id: @old_real_estate.id).find_each do |old_plan|
 			@request = Cloudinary::Uploader.upload(old_plan.url)
-			@new_plan = RealEstatePicture.new(old_plan.attributes)
+			@new_plan = Plan.new(old_plan.attributes)
 			@new_plan.id = nil
 			@new_plan.real_estate_id = @new_real_estate.id
 			@new_plan.public_id = @request["public_id"]
