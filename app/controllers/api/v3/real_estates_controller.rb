@@ -22,6 +22,33 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 		render :json => @real_estate.render_details_api
 	end
 
+	def duplicate
+		@old_real_estate = RealEstate.find_by_id(params[:id])
+		@new_real_estate = RealEstate.new(@old_real_estate.attributes)
+		@new_real_estate.id = nil;
+		return api_error(status: 422, errors: @new_real_estate.errors) unless @new_real_estate.save
+
+		RealEstateTypeLink.where(real_estate_id: @old_real_estate.id).find_each do |old_real_estate_type_link|
+			@new_real_estate_type_link = RealEstateTypeLink.new(old_real_estate_type_link.attributes)
+			@new_real_estate_type_link.id = nil
+			@new_real_estate_type_link.real_estate_id = @new_real_estate.id
+			return api_error(status: 422, errors: @new_real_estate_type_link.errors) unless @new_real_estate_type_link.save
+		end
+
+		RealEstateSellTypeLink.where(real_estate_id: @old_real_estate.id).find_each do |old_real_estate_sell_type_link|
+			@new_real_estate_sell_type_link = RealEstateSellTypeLink.new(old_real_estate_sell_type_link.attributes)
+			@new_real_estate_sell_type_link.id = nil
+			@new_real_estate_sell_type_link.real_estate_id = @new_real_estate.id
+			return api_error(status: 422, errors: @new_real_estate_sell_type_link.errors) unless @new_real_estate_sell_type_link.save
+		end
+
+		render(
+			json: @new_real_estate.render_api,
+			status: 201,
+			location: api_v3_real_estate_path(@new_real_estate.id)
+		)
+	end
+
 	def all
 		@real_estates = RealEstate.all
 		render :json => array_serializer(@real_estates, "classic")

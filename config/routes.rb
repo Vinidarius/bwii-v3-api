@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
 			get '/real_estates_list', to: 'real_estates#list'
 			get '/real_estate_details/:id', to: 'real_estates#details'
+			post '/real_estate_duplicate/:id', to: 'real_estates#duplicate'
 			get '/real_estates_all', to: 'real_estates#all'
 
 			get '/needs_list', to: 'needs#list'

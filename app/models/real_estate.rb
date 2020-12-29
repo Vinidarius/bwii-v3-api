@@ -6,12 +6,11 @@ class RealEstate < ApplicationRecord
 	has_many :real_estate_pictures
 	has_many :plans
 
-	# has_many :visits
+	has_many :visits
 
 	has_many :real_estate_type_links
 	has_many :real_estate_actor_links
 	has_many :users, through: :real_estate_actor_links, class_name: "User"
-	# has_many :real_estate_actors, through: :real_estate_actor_links, class_name: "RealEstateActor"
 	has_many :real_estate_sell_type_links
 	has_many :sector_links
 	has_many :sectors, through: :sector_links, class_name: "Sector"
@@ -105,7 +104,7 @@ class RealEstate < ApplicationRecord
 		self.parkings.destroy_all
 
 		self.note_links.destroy_all
-		# self.visits.destroy_all
+		self.visits.destroy_all
 
 		self.real_estate_type_links.destroy_all
 		self.real_estate_actor_links.destroy_all

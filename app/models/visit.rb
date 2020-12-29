@@ -10,7 +10,7 @@ class Visit < ApplicationRecord
 			date: self.date,
 			body: self.body,
 			kind: self.kind,
-			valid: self.valid,
+			verified: self.verified,
 			agent_id: self.agent_id,
 			real_estate_id: self.real_estate_id,
 			user_id: self.user_id,

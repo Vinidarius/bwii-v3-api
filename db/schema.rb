@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201202012635) do
+ActiveRecord::Schema.define(version: 20201229100838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -381,7 +381,7 @@ ActiveRecord::Schema.define(version: 20201202012635) do
     t.string "date"
     t.string "body"
     t.boolean "kind"
-    t.boolean "valid"
+    t.boolean "verified"
     t.bigint "agent_id"
     t.bigint "real_estate_id"
     t.bigint "user_id"

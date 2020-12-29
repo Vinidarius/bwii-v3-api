@@ -45,6 +45,9 @@ class Api::V3::VisitsController < Api::V3::BaseController
 
 	def permitted_params
 		params.require(:visit).permit(
+			:kind,
+			:date,
+			:verified,
 			:agent_id,
 			:real_estate_id,
 			:user_id
