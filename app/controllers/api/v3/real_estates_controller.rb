@@ -111,7 +111,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 		end
 
 		render(
-			json: @new_real_estate.render_api,
+			json: @new_real_estate.render_list_api,
 			status: 201,
 			location: api_v3_real_estate_path(@new_real_estate.id)
 		)
