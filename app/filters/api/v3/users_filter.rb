@@ -76,7 +76,7 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 		unless params[:area].blank?
 			# can't join user to needs
 			@valid_users = [];
-			@valid_users = @users.joins(:need_links).where("needs.area_min <= :area AND needs.area_max >= :area", {area: params[:area].to_i}).uniq.pluck(:id)
+			@valid_users = @users.joins(:needs).where("needs.area_min <= :area AND needs.area_max >= :area", {area: params[:area].to_i}).uniq.pluck(:id)
 			@users = @users.where(id: @valid_users)
 		end
 
