@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 	has_many :real_estate_actor_links
 	has_many :note_links
 	has_many :need_links
+	has_many :needs, through: :need_links, class_name: "Need"
 	has_many :real_estate_type_links, through: :needs
 	has_many :sector_links, through: :needs
 
