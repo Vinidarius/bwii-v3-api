@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <h2>Bienvenue sur le portail de changement de mot de passe BWII !</h2>
+  <p>Changez votre mot de passe en toute sécurité</p>
+</div>
+<div class="container well">
+<% if flash[:success] %>
+    <div class="alert alert-success">
+    <strong>Succès</strong> Votre mot de passe a été changé. Vous pouvez vous reconnecter à nouveau via l'application mobile.
+    </div>
+ <% end %>
+ <% if flash[:error] %>
+     <div class="alert alert-danger">
+     <strong>Erreur ! </strong><%= flash[:error] %>
+     </div>
+  <% end %>
+<%= simple_form_for :user, url: api_v3_password_users_url, :method => :put, html: { class: 'form-horizontal' },
+  wrapper: :horizontal_form do |f| %>
+    <%= f.input :password, placeholder: 'Mot de passe', label: false  %>
+    <%= f.input :password_confirmation, placeholder: 'Confirmation Mot de passe', label: false %>
+  <%= f.hidden_field :access_token, :value => params[:token] %>
+
+  <%= f.hidden_field :client, :value => params[:client_id] %>
+
+  <%= f.hidden_field :uid, :value => params[:uid] %>
+
+  <%= f.button :submit, "Modifier le mot de passe" %>
+<% end %>
+</div>

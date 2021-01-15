@@ -63,6 +63,9 @@ Rails.application.routes.draw do
 			get '/need_link_delete', to: 'need_links#destroy'
 			delete '/user_needs', to: 'need_links#delete_user'
 
+			get 'password_users', to: 'password_users#index'
+			put 'password_users', to: 'password_users#update'
+
 		end
 	end
 
