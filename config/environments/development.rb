@@ -21,8 +21,9 @@ Rails.application.configure do
       'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
     }
   else
-    config.action_controller.perform_caching = false
-
+		config.action_controller.perform_caching = false
+		config.action_mailer.default_url_options = { :host => 'localhost' }
+		config.action_mailer.delivery_method = :mailjet
     config.cache_store = :null_store
   end
 

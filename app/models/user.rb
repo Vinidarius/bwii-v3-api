@@ -122,4 +122,8 @@ class User < ActiveRecord::Base
 		self.real_estate_actor_links.destroy_all
 	end
 
+	def devise_mailer
+		UserMailer
+	end
+
 end

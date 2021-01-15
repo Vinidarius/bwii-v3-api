@@ -22,6 +22,9 @@ gem 'uglifier', '>= 1.3.0'
 # gem for paginate
 gem 'kaminari'
 
+#gem for mailing
+gem 'mailjet'
+
 # gem for upload
 gem 'cloudinary'
 gem "figaro"

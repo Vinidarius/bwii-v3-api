@@ -1,3 +1,5 @@
+Rails.application.routes.default_url_options[:host] = "staging-bwii-v3-api.herokuapp.com"
+
 Rails.application.routes.draw do
 
 	namespace :api do
