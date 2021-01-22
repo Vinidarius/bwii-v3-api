@@ -28,7 +28,7 @@ class Api::V3::VisitsController < Api::V3::BaseController
 
 	def update
 		@visit = Visit.find_by_id(params[:id])
-		@visit.update_attributes(permitted_params)
+		@visit = @visit.update_attributes(permitted_params)
 		return render :json => [] unless @visit.save()
 		render(
 			json: @visit.render_api,
