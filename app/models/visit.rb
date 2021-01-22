@@ -7,6 +7,7 @@ class Visit < ApplicationRecord
 	def render_api
 		{
 			id: self.id,
+			updated_at: self.updated_at,
 			date: self.date,
 			body: self.body,
 			kind: self.kind,
