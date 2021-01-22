@@ -65,15 +65,15 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@real_estates = @real_estates.where(area: (params[:minSize].to_i)..(params[:maxSize].to_i))
 		end
 
-		if params[:listOrder].eql? 0
+		if params[:listOrder].eql? "0"
 			@real_estates = @real_estates.order("lower(title) ASC")
-		elsif params[:listOrder].eql? 1
+		elsif params[:listOrder].eql? "1"
 			@real_estates = @real_estates.order("lower(title) DESC")
 		# elsif params[:listOrder].eql? 2
 		# 	@real_estates = @real_estates.order(area: :asc)
 		# elsif params[:listOrder].eql? 3
 		# 	@real_estates = @real_estates.order(area: :desc)
-		elsif params[:listOrder].eql? 2
+	elsif params[:listOrder].eql? "2"
 			@real_estates = @real_estates.joins(:visits).where(visits: {agent_id: params[:agent_id]}).order("visits.updated_at desc")
 		end
 
