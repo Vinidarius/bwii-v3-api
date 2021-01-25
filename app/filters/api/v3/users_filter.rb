@@ -65,10 +65,12 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 			end
 		end
 
-		if params[:alphaOrder].eql? "true"
+		if params[:listOrder].eql? "0"
 			@users = @users.order("lower(lastname) ASC")
-		else
+		elsif params[:listOrder].eql? "1"
 			@users = @users.order("lower(lastname) DESC")
+		elsif params[:listOrder].eql? "2"
+			@users = @users.joins(:visits).where(visits: {agent_id: params[:agent_id]}).order("visits.updated_at desc")
 		end
 
 

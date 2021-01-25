@@ -73,7 +73,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 		# 	@real_estates = @real_estates.order(area: :asc)
 		# elsif params[:listOrder].eql? 3
 		# 	@real_estates = @real_estates.order(area: :desc)
-	elsif params[:listOrder].eql? "2"
+		elsif params[:listOrder].eql? "2"
 			@real_estates = @real_estates.joins(:visits).where(visits: {agent_id: params[:agent_id]}).order("visits.updated_at desc")
 		end
 
