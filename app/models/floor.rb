@@ -14,7 +14,7 @@ class Floor < ApplicationRecord
 			divisible: self.divisible,
 			fill: self.fill,
 			terrace: self.terrace,
-			rooms: self.rooms.map(&:render_api),
+			rooms: self.rooms.order(number: :asc).map(&:render_api),
 			building_id: self.building_id
 		}
 	end
