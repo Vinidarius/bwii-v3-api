@@ -13,20 +13,23 @@ class Api::V3::VisitsController < Api::V3::BaseController
 
 	def create
 		if Visit.exists?(:real_estate_id => params[:real_estate_id], :agent_id => params[:agent_id], :kind => params[:kind])
+			puts "ok"
 			params[:id] = Visit.find_by(real_estate_id: params[:real_estate_id], agent_id: params[:agent_id], kind: params[:kind]).id
-			@visit = Visit.find_by_id(params[:id]).touch
+			Visit.find_by_id(params[:id]).touch
 		elsif Visit.exists?(:user_id => params[:user_id], :agent_id => params[:agent_id], :kind => params[:kind])
+			puts "okok"
 			params[:id] = Visit.find_by(user_id: params[:user_id], agent_id: params[:agent_id], kind: params[:kind]).id
-			@visit = Visit.find_by_id(params[:id]).touch
+			Visit.find_by_id(params[:id]).touch
 		else
+			puts "okokok"
 			@visit = Visit.new(permitted_params)
-		end
 			return render :json => [] unless @visit.save
 			render(
 				json: @visit.render_api,
 				status: 201,
 				location: api_v3_visit_path(@visit.id)
 			)
+		end
 	end
 
 	def update
