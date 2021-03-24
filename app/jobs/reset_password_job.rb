@@ -6,9 +6,9 @@ class ResetPasswordJob < ApplicationJob
 			user.reset_password_token = 'temp'
 			if (user.firstname && user.firstname[0])
 				if (user.lastname && user.lastname[0])
-					@password = user.lastname[0].upcase + user.lastname[0].upcase + "-2020-Bwii";
+					@password = user.lastname[0].upcase + user.firstname[0].upcase + "-2020-Bwii";
 				else
-					@password = user.lastname[0].upcase + "-2020-Bwii";
+					@password = user.firstname[0].upcase + "-2020-Bwii";
 				end
 			else
 				@password = "2020-Bwii";
