@@ -3,11 +3,18 @@ class ResetPasswordJob < ApplicationJob
 
   def perform(*args)
     User.all.each do |user|
-			puts user.id
-			# user.reset_password_token = 'temp'
-			# @password = user.lastname[0].upcase + user.lastname[0].upcase + "-2020-Bwii";
-			# user.reset_password(@password, @password);
-			# user.save
+			user.reset_password_token = 'temp'
+			if (user.firstname && user.firstname[0])
+				if (user.lastname && user.lastname[0])
+					@password = user.lastname[0].upcase + user.lastname[0].upcase + "-2020-Bwii";
+				else
+					@password = user.lastname[0].upcase + "-2020-Bwii";
+				end
+			else
+				@password = "2020-Bwii";
+			end
+			user.reset_password(@password, @password);
+			user.save
 		end
   end
 end
