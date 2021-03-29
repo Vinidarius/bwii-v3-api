@@ -106,6 +106,7 @@ class User < ActiveRecord::Base
 			company: self.company,
 			job: self.job,
 			user_type_links: self.user_type_links.map(&:render_details_api),
+			user_team_links: self.user_team_links.map(&:render_id_api),
 			current_sign_in_at: self.current_sign_in_at,
 			cgus: self.cgus,
 			ccs: self.ccs,
