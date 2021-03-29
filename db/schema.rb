@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210108101124) do
+ActiveRecord::Schema.define(version: 20210329005006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -321,6 +321,23 @@ ActiveRecord::Schema.define(version: 20210108101124) do
     t.index ["region_id"], name: "index_sectors_on_region_id"
   end
 
+  create_table "user_team_links", force: :cascade do |t|
+    t.bigint "user_team_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "team_id"
+    t.index ["user_id"], name: "index_user_team_links_on_user_id"
+    t.index ["user_team_id"], name: "index_user_team_links_on_user_team_id"
+  end
+
+  create_table "user_teams", force: :cascade do |t|
+    t.string "title"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_type_links", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "user_type_id"
@@ -429,6 +446,8 @@ ActiveRecord::Schema.define(version: 20210108101124) do
   add_foreign_key "sector_links", "sectors"
   add_foreign_key "sectors", "compagnies"
   add_foreign_key "sectors", "regions"
+  add_foreign_key "user_team_links", "user_teams"
+  add_foreign_key "user_team_links", "users"
   add_foreign_key "user_type_links", "user_types"
   add_foreign_key "user_type_links", "users"
   add_foreign_key "user_types", "compagnies"

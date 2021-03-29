@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 			resources :real_estate_actors, only: [:index, :show, :create, :update, :destroy]
 			resources :real_estate_actor_links, only: [:index, :show, :create, :update, :destroy]
 
+			resources :user_teams, only: [:index, :show, :create, :update, :destroy]
+			resources :user_team_links, only: [:index, :show, :create, :update, :destroy]
+
 			resources :real_estate_sell_types, only: [:index, :show, :create, :update, :destroy]
 			resources :real_estate_sell_type_links, only: [:index, :show, :create, :update, :destroy]
 
