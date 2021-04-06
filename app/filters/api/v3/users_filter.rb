@@ -15,7 +15,7 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 		@user_types = UserType.all
 
 		if params[:cession]
-			@users = @users.joins(:user_team_links).size > 0
+			@users = @users.joins(:user_team_links).group('users.id')
 		end
 
 		unless params[:archived].blank?
