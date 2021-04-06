@@ -12,14 +12,10 @@ class Api::V3::UserTeamLinksController < Api::V3::BaseController
 	end
 
 	def create
-		puts params[:user_id]
-		puts params[:user_team_id]
 		if UserTeamLink.exists?(user_id: params[:user_id], user_team_id: params[:user_team_id])
-			puts "okokokokokokokokokokokokokokokokokokokokokokokokok"
 			params[:id] = UserTeamLink.find_by(user_id: params[:user_id], user_team_id: params[:user_team_id]).id
 			self.update();
 		else
-			puts "pasokpasokpasokpasokpasokpasokpasokpasokpasokpasok"
 			@user_team_link = UserTeamLink.new(permitted_params)
 			return render :json => [] unless @user_team_link.save
 			render(

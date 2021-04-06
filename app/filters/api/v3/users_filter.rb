@@ -14,6 +14,10 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 		# @user_types = UserType.all.where(compagny_id: @compagny)
 		@user_types = UserType.all
 
+		if params[:cession]
+			@users = @users.joins(:user_team_links).size > 0
+		end
+
 		unless params[:archived].blank?
 			@users = @users.where(archived: params[:archived])
 		end

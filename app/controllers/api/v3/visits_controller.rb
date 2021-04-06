@@ -15,10 +15,6 @@ class Api::V3::VisitsController < Api::V3::BaseController
 		if Visit.exists?(:real_estate_id => params[:real_estate_id], :agent_id => params[:agent_id], :kind => params[:kind], user_id: params[:user_id])
 			params[:id] = Visit.find_by(real_estate_id: params[:real_estate_id], agent_id: params[:agent_id], kind: params[:kind], user_id: params[:user_id]).id
 			Visit.find_by_id(params[:id]).touch
-		# elsif Visit.exists?(:user_id => params[:user_id], :agent_id => params[:agent_id], :kind => params[:kind])
-		# 	puts "okok"
-		# 	params[:id] = Visit.find_by(user_id: params[:user_id], agent_id: params[:agent_id], kind: params[:kind]).id
-		# 	Visit.find_by_id(params[:id]).touch
 		else
 			@visit = Visit.new(permitted_params)
 			return render :json => [] unless @visit.save
