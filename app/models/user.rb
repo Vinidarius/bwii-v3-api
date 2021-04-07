@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
 	belongs_to :compagny
+
+	has_many :user_pictures
 	has_many :user_type_links
 	has_many :user_team_links
 
@@ -27,6 +29,7 @@ class User < ActiveRecord::Base
 			id: self.id,
 			old_id: self.old_id,
 			created_at: self.created_at,
+			user_pictures: self.user_pictures.map(&:render_api),
 			firstname: self.firstname,
 			lastname: self.lastname,
 			email: self.email,
@@ -46,6 +49,7 @@ class User < ActiveRecord::Base
 	def render_list_api
 		{
 			id: self.id,
+			user_pictures: self.user_pictures.map(&:render_api),
 			firstname: self.firstname,
 			lastname: self.lastname,
 			email: self.email,
@@ -58,6 +62,7 @@ class User < ActiveRecord::Base
 	def render_info_api
 		{
 			id: self.id,
+			user_pictures: self.user_pictures.map(&:render_api),
 			firstname: self.firstname,
 			lastname: self.lastname,
 			email: self.email,
@@ -79,6 +84,7 @@ class User < ActiveRecord::Base
 		{
 			id: self.id,
 			created_at: self.created_at,
+			user_pictures: self.user_pictures.map(&:render_api),
 			firstname: self.firstname,
 			lastname: self.lastname,
 			email: self.email,
@@ -100,6 +106,7 @@ class User < ActiveRecord::Base
 			id: self.id,
 			old_id: self.old_id,
 			created_at: self.created_at,
+			user_pictures: self.user_pictures.map(&:render_api),
 			firstname: self.firstname,
 			lastname: self.lastname,
 			email: self.email,
@@ -116,6 +123,8 @@ class User < ActiveRecord::Base
 	end
 
 	def destroy_associations
+		self.destroy_pictures()
+
 		self.user_type_links.destroy_all
 		self.user_team_links.destroy_all
 		# self.favorites.destroy_all
@@ -123,6 +132,13 @@ class User < ActiveRecord::Base
 		self.note_links.destroy_all
 		self.visits.destroy_all
 		self.real_estate_actor_links.destroy_all
+	end
+
+	def destroy_pictures
+		self.user_pictures.each do |user_picture|
+			Cloudinary::Uploader.destroy(user_picture.public_id)
+		end
+		self.user_pictures.destroy_all
 	end
 
 	def devise_mailer

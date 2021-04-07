@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210329005006) do
+ActiveRecord::Schema.define(version: 20210407001753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -321,6 +321,17 @@ ActiveRecord::Schema.define(version: 20210329005006) do
     t.index ["region_id"], name: "index_sectors_on_region_id"
   end
 
+  create_table "user_pictures", force: :cascade do |t|
+    t.string "public_id"
+    t.string "url"
+    t.integer "position"
+    t.integer "angle", default: 0
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_pictures_on_user_id"
+  end
+
   create_table "user_team_links", force: :cascade do |t|
     t.bigint "user_team_id"
     t.bigint "user_id"
@@ -446,6 +457,7 @@ ActiveRecord::Schema.define(version: 20210329005006) do
   add_foreign_key "sector_links", "sectors"
   add_foreign_key "sectors", "compagnies"
   add_foreign_key "sectors", "regions"
+  add_foreign_key "user_pictures", "users"
   add_foreign_key "user_team_links", "user_teams"
   add_foreign_key "user_team_links", "users"
   add_foreign_key "user_type_links", "user_types"
