@@ -14,7 +14,7 @@ class Api::V3::UsersFilter < Api::V3::BaseFilter
 		# @user_types = UserType.all.where(compagny_id: @compagny)
 		@user_types = UserType.all
 
-		if params[:cession]
+		if params[:cession].eql? "true"
 			@users = @users.joins(:user_team_links, :visits).group('users.id', 'visits.id')
 		end
 
