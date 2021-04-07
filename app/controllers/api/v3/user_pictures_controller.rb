@@ -12,7 +12,7 @@ class Api::V3::UserPicturesController < Api::V3::BaseController
 	end
 
 	def create
-		@request = Cloudinary::Uploader.upload(params[:base])
+		@request = Cloudinary::Uploader.upload(params[:url])
 		@user_picture = UserPicture.new(permitted_params)
 		@user_picture.public_id = @request["public_id"]
 		@user_picture.url = @request["secure_url"]
