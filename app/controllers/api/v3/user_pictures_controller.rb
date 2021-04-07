@@ -1,4 +1,4 @@
-class UserPicturesController < ApplicationController
+class Api::V3::UserPicturesController < Api::V3::BaseController
 
 	def index
 		@user_pictures = Api::V3::UserPicturesFilter.new(UserPicture.all, params).collection
