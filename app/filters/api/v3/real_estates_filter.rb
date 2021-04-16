@@ -31,9 +31,9 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@valid_real_estates = []
 
 			@valid_real_estates += @joins_real_estates.where("users.firstname ILIKE '%#{params[:proprio]}%'").or(
-				@joins_real_estates.where("users.lastproprio ILIKE '%#{params[:proprio]}%'")).or(
-				@joins_real_estates.where("concat(users.firstproprio, ' ', users.lastproprio) ILIKE '%#{params[:proprio]}%'")).or(
-				@joins_real_estates.where("concat(users.lastproprio, ' ', users.firstproprio) ILIKE '%#{params[:proprio]}%'")).or(
+				@joins_real_estates.where("users.lastname ILIKE '%#{params[:proprio]}%'")).or(
+				@joins_real_estates.where("concat(users.firstname, ' ', users.lastname) ILIKE '%#{params[:proprio]}%'")).or(
+				@joins_real_estates.where("concat(users.lastname, ' ', users.firstname) ILIKE '%#{params[:proprio]}%'")).or(
 				@joins_real_estates.where("users.company ILIKE '%#{params[:proprio]}%'")).pluck(:id)
 
 			@real_estates = @real_estates.where(id: @valid_real_estates);
