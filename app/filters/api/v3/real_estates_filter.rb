@@ -30,11 +30,11 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@joins_real_estates = @real_estates.joins(:real_estate_actor_links, :users).where(real_estate_actor_links: {real_estate_actor_id: [1]})
 			@valid_real_estates = []
 
-			@valid_real_estates += @joins_real_estates.where("users.firstname ILIKE '%#{params[:name]}%'").or(
-				@joins_real_estates.where("users.lastname ILIKE '%#{params[:name]}%'")).or(
-				@joins_real_estates.where("concat(users.firstname, ' ', users.lastname) ILIKE '%#{params[:name]}%'")).or(
-				@joins_real_estates.where("concat(users.lastname, ' ', users.firstname) ILIKE '%#{params[:name]}%'")).or(
-				@joins_real_estates.where("users.company ILIKE '%#{params[:name]}%'")).pluck(:id)
+			@valid_real_estates += @joins_real_estates.where("users.firstname ILIKE '%#{params[:proprio]}%'").or(
+				@joins_real_estates.where("users.lastproprio ILIKE '%#{params[:proprio]}%'")).or(
+				@joins_real_estates.where("concat(users.firstproprio, ' ', users.lastproprio) ILIKE '%#{params[:proprio]}%'")).or(
+				@joins_real_estates.where("concat(users.lastproprio, ' ', users.firstproprio) ILIKE '%#{params[:proprio]}%'")).or(
+				@joins_real_estates.where("users.company ILIKE '%#{params[:proprio]}%'")).pluck(:id)
 
 			@real_estates = @real_estates.where(id: @valid_real_estates);
 		end
