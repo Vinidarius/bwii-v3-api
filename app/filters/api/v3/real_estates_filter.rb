@@ -21,7 +21,20 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 
 			@valid_real_estates = @real_estates.where("title ILIKE '%#{params[:title]}%'").pluck(:id)
 			@valid_real_estates += @real_estates.joins(:sectors).where("sectors.name ILIKE ?", "%#{params[:title]}%").pluck(:id)
-			@valid_real_estates += @real_estates.joins(:real_estate_actor_links, :users).where(real_estate_actor_links: {real_estate_actor_id: [1, 2]}).where("users.company ILIKE ?", "%#{params[:title]}%").pluck(:id)
+			@valid_real_estates += @real_estates.joins(:real_estate_actor_links, :users).where(real_estate_actor_links: {real_estate_actor_id: [1, 2, 3]}).where("users.company ILIKE ?", "%#{params[:title]}%").pluck(:id)
+
+			@real_estates = @real_estates.where(id: @valid_real_estates);
+		end
+
+		if params[:proprio]
+			@joins_real_estates = @real_estates.joins(:real_estate_actor_links, :users).where(real_estate_actor_links: {real_estate_actor_id: [1]})
+			@valid_real_estates = []
+
+			@valid_real_estates += @joins_real_estates.where("users.firstname ILIKE '%#{params[:name]}%'").or(
+				@joins_real_estates.where("users.lastname ILIKE '%#{params[:name]}%'")).or(
+				@joins_real_estates.where("concat(users.firstname, ' ', users.lastname) ILIKE '%#{params[:name]}%'")).or(
+				@joins_real_estates.where("concat(users.lastname, ' ', users.firstname) ILIKE '%#{params[:name]}%'")).or(
+				@joins_real_estates.where("users.company ILIKE '%#{params[:name]}%'")).pluck(:id)
 
 			@real_estates = @real_estates.where(id: @valid_real_estates);
 		end
