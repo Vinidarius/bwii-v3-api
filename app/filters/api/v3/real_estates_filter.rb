@@ -26,7 +26,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@real_estates = @real_estates.where(id: @valid_real_estates);
 		end
 
-		unless params[:proprio].blank?
+		if params[:proprio] && params[:proprio] != nil
 			@joins_real_estates = @real_estates.joins(:real_estate_actor_links, :users).where(real_estate_actor_links: {real_estate_actor_id: [1]})
 			@valid_real_estates = []
 
@@ -39,7 +39,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@real_estates = @real_estates.where(id: @valid_real_estates);
 		end
 
-		unless params[:promotor].blank?
+		if params[:promotor] && params[:promotor] != nil
 			@joins_real_estates = @real_estates.joins(:real_estate_actor_links, :users).where(real_estate_actor_links: {real_estate_actor_id: [2]})
 			@valid_real_estates = []
 
@@ -52,7 +52,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@real_estates = @real_estates.where(id: @valid_real_estates);
 		end
 
-		unless params[:architect].blank?
+		if params[:architect] && params[:architect] != nil
 			@joins_real_estates = @real_estates.joins(:real_estate_actor_links, :users).where(real_estate_actor_links: {real_estate_actor_id: [3]})
 			@valid_real_estates = []
 
