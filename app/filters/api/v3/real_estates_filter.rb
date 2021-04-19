@@ -26,7 +26,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@real_estates = @real_estates.where(id: @valid_real_estates);
 		end
 
-		unless params[:proprio].blank?
+		unless params[:proprio].nil?
 			@joins_real_estates = @real_estates.joins(:real_estate_actor_links, :users).where(real_estate_actor_links: {real_estate_actor_id: [1]})
 			@valid_real_estates = []
 
