@@ -11,6 +11,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 		# @compagny ? (@real_estates = @real_estates.where(compagny_id: @compagny)) : (return [])
 		# @real_estate_types = RealEstateType.all.where(compagny_id: @compagny)
 		@real_estate_types = RealEstateType.all
+		@real_estate_sell_types = RealEstateSellType.all
 
 		unless params[:archived].blank?
 			@real_estates = @real_estates.where(archived: params[:archived])
@@ -89,6 +90,19 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 						@value -= 2 ** (@real_estate_types.length - 1 - index)
 						@valid_real_estates = @real_estates.joins(:real_estate_type_links).where(real_estate_type_links: {real_estate_type_id: el.id}).pluck(:id).concat(@valid_real_estates)
 					end
+				end
+				@real_estates = @real_estates.where(id: @valid_real_estates)
+			end
+		end
+
+		if params[:sell_categories] && params[:sell_categories].to_i != 0
+			@value = params[:sell_categories].to_i
+			@valid_real_estates = []
+
+			@real_estate_sell_types.each_with_index do |el, index|
+				if @value >= 2 ** (@real_estate_sell_types.length - 1 - index)
+					@value -= 2 ** (@real_estate_sell_types.length - 1 - index)
+					@valid_real_estates = @real_estates.joins(:real_estate_sell_type_links).where(real_estate_sell_type_links: {real_estate_sell_type_id: el.id}).pluck(:id).concat(@valid_real_estates)
 				end
 				@real_estates = @real_estates.where(id: @valid_real_estates)
 			end
