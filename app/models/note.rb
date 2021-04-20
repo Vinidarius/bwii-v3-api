@@ -11,7 +11,7 @@ class Note < ApplicationRecord
 			date: self.date,
 			title: self.title,
 			body: self.body,
-			note_links: self.note_links,
+			note_links: self.note_links.map(&:render_api),
 			agent_id: self.agent_id
 		}
 	end
