@@ -88,6 +88,7 @@ class RealEstate < ApplicationRecord
 			id: self.id,
 			title: self.title,
 			real_estate_pictures: self.real_estate_pictures.order(position: :asc).map(&:render_api).first,
+			real_estate_sell_type_links: self.real_estate_sell_type_links.map(&:render_details_api),
 			address: self.address,
 			zipcode: self.zipcode,
 			city: self.city,
