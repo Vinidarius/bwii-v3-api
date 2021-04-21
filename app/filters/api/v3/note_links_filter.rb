@@ -19,7 +19,7 @@ class Api::V3::NoteLinksFilter < Api::V3::BaseFilter
 			note_links = note_links.where('note_links.note_id = ?', params[:note_id])
 		end
 
-   return self.with_associations(note_links)
+   return self.with_associations(note_links.order(updated_at: :desc))
   end
 
 end
