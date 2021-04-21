@@ -7,6 +7,7 @@ class Api::V3::NotesFilter < Api::V3::BaseFilter
 			notes = notes.where('notes.agent_id = ?', params[:agent_id])
 		end
 
-   return self.with_associations(notes)
+   return self.with_associations(notes.order(updated_at: :desc))
+  end
 
 end
