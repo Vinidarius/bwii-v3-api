@@ -168,6 +168,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 			:years,
 			:dispo,
 			:area,
+			:divisible,
 			:charges,
 			:foncier,
 			:archived,

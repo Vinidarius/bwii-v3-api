@@ -36,6 +36,7 @@ class RealEstate < ApplicationRecord
 			years: self.years,
 			dispo: self.dispo,
 			area: self.area,
+			divisible: self.divisible,
 			charges: self.charges,
 			foncier: self.foncier,
 			buildings: self.buildings.map(&:render_api),
@@ -68,6 +69,7 @@ class RealEstate < ApplicationRecord
 			years: self.years,
 			dispo: self.dispo,
 			area: self.area,
+			divisible: self.divisible,
 			charges: self.charges,
 			foncier: self.foncier,
 			buildings: self.buildings.map(&:render_api),
@@ -94,7 +96,8 @@ class RealEstate < ApplicationRecord
 			city: self.city,
 			longitude: self.longitude,
 			latitude: self.latitude,
-			area: self.area
+			area: self.area,
+			divisible: self.divisible
 		}
 	end
 
