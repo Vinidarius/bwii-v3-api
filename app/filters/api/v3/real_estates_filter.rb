@@ -104,8 +104,8 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 					@value -= 2 ** (@real_estate_sell_types.length - 1 - index)
 					@valid_real_estates = @real_estates.joins(:real_estate_sell_type_links).where(real_estate_sell_type_links: {real_estate_sell_type_id: el.id}).pluck(:id).concat(@valid_real_estates)
 				end
-				@real_estates = @real_estates.where(id: @valid_real_estates)
 			end
+			@real_estates = @real_estates.where(id: @valid_real_estates)
 		end
 
 		if params[:sectors_list] && params[:sectors_list].size > 2
