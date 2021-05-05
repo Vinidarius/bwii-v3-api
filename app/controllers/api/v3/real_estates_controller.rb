@@ -170,6 +170,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 			:area,
 			:divisible,
 			:charges,
+			:charges_desc,
 			:foncier,
 			:archived,
 			:publy,
