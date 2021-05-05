@@ -76,7 +76,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@value = params[:categories].to_i
 			@valid_real_estates = []
 
-			if params[:operand1].eql? "true"
+			if params[:operand0].eql? "true"
 				@real_estate_types.each_with_index do |el, index|
 					if @value >= 2 ** (@real_estate_types.length - 1 - index)
 						@value -= 2 ** (@real_estate_types.length - 1 - index)
@@ -99,7 +99,7 @@ class Api::V3::RealEstatesFilter < Api::V3::BaseFilter
 			@value = params[:sell_categories].to_i
 			@valid_real_estates = []
 
-			if params[:operand2].eql? "true"
+			if params[:operand1].eql? "true"
 				@real_estate_sell_types.each_with_index do |el, index|
 					if @value >= 2 ** (@real_estate_sell_types.length - 1 - index)
 						@value -= 2 ** (@real_estate_sell_types.length - 1 - index)
