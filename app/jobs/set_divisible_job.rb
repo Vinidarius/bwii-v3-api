@@ -6,7 +6,7 @@ class SetDivisibleJob < ApplicationJob
 			@min_val = 0;
 			real_estate.buildings.each do |building|
 				puts building.divisible
-				if building.divisible && building.divisible.to_i != 0 && building.divisible.to_i < @min_val
+				if building.divisible && building.divisible.to_i != 0 && (@min_val == 0 || building.divisible.to_i < @min_val)
 					@min_val = building.divisible.to_i
 				end
 			end
