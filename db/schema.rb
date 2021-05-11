@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210505213214) do
+ActiveRecord::Schema.define(version: 20210511191040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -276,6 +276,7 @@ ActiveRecord::Schema.define(version: 20210505213214) do
     t.integer "old_id"
     t.integer "divisible"
     t.string "charges_desc"
+    t.integer "dispo_area"
     t.index ["compagny_id"], name: "index_real_estates_on_compagny_id"
   end
 

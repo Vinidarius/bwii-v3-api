@@ -1,0 +1,5 @@
+current directory: /home/axel/Bwii/Bwii-v3-api/vendor/bundle/gems/childprocess-1.0.1/ext
+/home/axel/.rbenv/versions/2.4.2/bin/ruby mkrf_conf.rb
+
+current directory: /home/axel/Bwii/Bwii-v3-api/vendor/bundle/gems/childprocess-1.0.1/ext
+/home/axel/.rbenv/versions/2.4.2/bin/ruby -I/home/axel/.rbenv/versions/2.4.2/lib/ruby/site_ruby/2.4.0 -rrubygems /home/axel/Bwii/Bwii-v3-api/vendor/bundle/gems/rake-12.3.2/exe/rake RUBYARCHDIR\=/home/axel/Bwii/Bwii-v3-api/vendor/bundle/extensions/x86_64-linux/2.4.0-static/childprocess-1.0.1 RUBYLIBDIR\=/home/axel/Bwii/Bwii-v3-api/vendor/bundle/extensions/x86_64-linux/2.4.0-static/childprocess-1.0.1

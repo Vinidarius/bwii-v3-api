@@ -169,6 +169,7 @@ class Api::V3::RealEstatesController < Api::V3::BaseController
 			:dispo,
 			:area,
 			:divisible,
+			:dispo_area,
 			:charges,
 			:charges_desc,
 			:foncier,

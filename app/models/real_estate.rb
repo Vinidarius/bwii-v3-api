@@ -37,6 +37,7 @@ class RealEstate < ApplicationRecord
 			dispo: self.dispo,
 			area: self.area,
 			divisible: self.divisible,
+			dispo_area: self.dispo_area,
 			charges: self.charges,
 			charges_desc: self.charges_desc,
 			foncier: self.foncier,
@@ -71,6 +72,7 @@ class RealEstate < ApplicationRecord
 			dispo: self.dispo,
 			area: self.area,
 			divisible: self.divisible,
+			dispo_area: self.dispo_area,
 			charges: self.charges,
 			charges_desc: self.charges_desc,
 			foncier: self.foncier,
@@ -99,7 +101,8 @@ class RealEstate < ApplicationRecord
 			longitude: self.longitude,
 			latitude: self.latitude,
 			area: self.area,
-			divisible: self.divisible
+			divisible: self.divisible,
+			dispo_area: self.dispo_area
 		}
 	end
 
