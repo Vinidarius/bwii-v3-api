@@ -2,7 +2,7 @@ class SetDispoAreaJob < ApplicationJob
   queue_as :default
 
 	def perform(*args)
-		RealEstate.limit(10).each do |real_estate|
+		RealEstate.each do |real_estate|
 			@dispo_area = 0;
 			real_estate.buildings.each do |building|
 				building.floors.each do |floor|
