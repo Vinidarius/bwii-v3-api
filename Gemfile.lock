@@ -136,6 +136,7 @@ GEM
     rack-cors (1.0.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    railroady (1.5.3)
     rails (5.1.7)
       actioncable (= 5.1.7)
       actionmailer (= 5.1.7)
@@ -243,6 +244,7 @@ DEPENDENCIES
   pg
   puma (~> 3.7)
   rack-cors
+  railroady (~> 1.5, >= 1.5.3)
   rails (~> 5.1.7)
   rb-readline
   sass-rails (~> 5.0)
